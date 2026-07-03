@@ -1033,7 +1033,6 @@ body.viewer-mode #viewerSection{display:block}
         <label class="copy-opt-row"><input type="checkbox" id="optCopyTables" checked> نسخ الجداول</label>
         <label class="copy-opt-row"><input type="checkbox" id="optCopyExplain"> إرفاق شرح الخطط</label>
         <label class="copy-opt-row"><input type="checkbox" id="optCopyCatTrans"> إرفاق شرح الانتقال بين الفئات</label>
-        <label class="copy-opt-row"><input type="checkbox" id="optCopyLegal"> إرفاق الملاحظات القانونية</label>
       </div>
       <div class="modal-plans" id="modalPlansList"></div>
       <div id="shareLinkContainer" style="display:none">
@@ -1249,7 +1248,7 @@ function buildPlanExplanationHTML(plan,g,allPlans){
   return`<div class="plan-explain-block no-print"><div class="explain-title">📌 شرح الخطة</div><div class="explain-text">${body}</div></div>`;
 }
 
-/* ── 📈 خطة الانتقال بين الفئات (مبني تلقائياً من جدول الخطة) ── */
+/* ── 📈 خطة الانتقال بين الفئات (مختصر: أول خطوتين + ملخص عام ديناميكي) ── */
 function buildCatTransitionText(plan){
   const yp=plan.yearsPlan;
   if(!yp||!yp.length)return'';
@@ -1257,12 +1256,17 @@ function buildCatTransitionText(plan){
   yp.forEach(r=>{const last=groups[groups.length-1];if(last&&last.cat===r.cat)last.years++;else groups.push({cat:r.cat,startAge:r.age,years:1});});
   let t=`📈 خطة الانتقال بين الفئات\n`;
   t+=`أنت حالياً تبدأ بالفئة ${ordCat(groups[0].cat)}.\n`;
-  for(let i=1;i<groups.length;i++){
-    const prev=groups[i-1];
-    if(i===1)t+=`عند إكمال عمر ${groups[i].startAge} سنة يمكنك الانتقال إلى الفئة ${ordCat(groups[i].cat)}.\n`;
-    else t+=`وبعد تسديد 12 شهراً في الفئة ${ordCat(prev.cat)} يمكنك الانتقال إلى الفئة ${ordCat(groups[i].cat)} (بعمر ${groups[i].startAge} سنة).\n`;
+  if(groups.length===1){
+    t+=`وتبقى ضمن هذه الفئة حتى نهاية الخطة دون أي انتقال.\n`;
+    return t;
   }
-  if(groups.length===1)t+=`وتبقى ضمن هذه الفئة حتى نهاية الخطة دون أي انتقال.\n`;
+  t+=`عند إكمال عمر ${groups[1].startAge} سنة يمكنك الانتقال إلى الفئة ${ordCat(groups[1].cat)}.\n`;
+  if(groups.length===2)return t;
+  t+=`وبعد تسديد 12 شهراً في الفئة ${ordCat(groups[1].cat)} يمكنك الانتقال إلى الفئة ${ordCat(groups[2].cat)} (بعمر ${groups[2].startAge} سنة).\n`;
+  if(groups.length>3){
+    const finalG=groups[groups.length-1];
+    t+=`وتستمر بنفس الآلية، حيث يمكنك الانتقال إلى الفئة الأعلى بعد تسديد (12) شهراً في كل فئة، إلى أن تستقر على الفئة (${finalG.cat}) بعمر ${finalG.startAge} سنة.\n`;
+  }
   return t;
 }
 function buildCatTransitionHTML(plan){
@@ -1271,21 +1275,6 @@ function buildCatTransitionHTML(plan){
   const lines=txt.split('\n').filter(Boolean);
   const body=lines.slice(1).map(l=>`<p>${l}</p>`).join('');
   return`<div class="cat-transition-block no-print"><div class="explain-title">📈 خطة الانتقال بين الفئات</div><div class="explain-text">${body}</div></div>`;
-}
-
-/* ── 📜 ملاحظات قانونية عامة (نص ثابت مرتبط بالقانون) ── */
-function buildLegalNotesText(){
-  return`📜 ملاحظات قانونية (وفق قانون الضمان الاجتماعي رقم 18 لسنة 2023):\n`+
-  `- الحد الأدنى للراتب التقاعدي 350,000 دينار، والحد الأقصى 80% من متوسط الأجر الداخل في حساب التقاعد (المادة 36).\n`+
-  `- الراتب التقاعدي يُستحق فقط عند إكمال السن القانونية وليس عند مجرد بلوغها.\n`+
-  `- الاشتراك الشهري يُحتسب بنسبة 5% من أجر الفئة الوظيفية.\n`+
-  `- شراء الخدمة وفق المادة (33) يُحتسب بواقع 17% من متوسط الأجر شهرياً عن كل شهر شراء.\n`+
-  `- هذه النتائج تقديرية وتخضع للتغيير وفق التشريعات والتعليمات النافذة.`;
-}
-function buildLegalNotesHTML(){
-  const lines=buildLegalNotesText().split('\n').filter(Boolean);
-  const body=lines.slice(1).map(l=>`<p>${l}</p>`).join('');
-  return`<div class="plan-explain-block no-print" id="legalNotesBlock"><div class="explain-title">📜 ملاحظات قانونية</div><div class="explain-text">${body}</div></div>`;
 }
 
 function buildPlanCard(plan,ci,nm,g,age,prevMo,ts,targetCatForLast5,allPlans){
@@ -1648,7 +1637,7 @@ function planFixed(svc,birth,sa,useUC,uc,g,ta,joinDate){
 /* ── STATE ── */
 let PLANS=[],USER=null;
 /* خيارات محتوى النسخ — يتم تعديلها من مودال "نسخ الكل" وتبقى محفوظة للاستخدام مع زر النسخ الفردي أيضاً */
-let COPY_OPTS={tables:true,planExplain:false,catExplain:false,legalNotes:false};
+let COPY_OPTS={tables:true,planExplain:false,catExplain:false};
 
 /* ── COPY TEXT ── */
 function copyPlanText(plan,user,idx,opts){
@@ -1798,7 +1787,6 @@ function generate(){
     html+=buildProgressSection(PLANS,ts);
     html+=buildLifetimeSection(PLANS,PLANS[0].yearsPlan,PLANS[0].totalServiceMonths-PLANS[0].purchaseMonths);
     html+=buildWhatIfSection(birth,sa,useUC,uc,g,jd,prior);
-    html+=buildLegalNotesHTML();
     document.getElementById('results').innerHTML=html;
     /* ── Init what-if ── */
     const baseP=PLANS.length?PLANS.reduce((a,b)=>b.pension<a.pension?b:a,PLANS[0]).pension:0;
@@ -1896,7 +1884,6 @@ function modalConfirm(){
     COPY_OPTS.tables=document.getElementById('optCopyTables').checked;
     COPY_OPTS.planExplain=document.getElementById('optCopyExplain').checked;
     COPY_OPTS.catExplain=document.getElementById('optCopyCatTrans').checked;
-    COPY_OPTS.legalNotes=document.getElementById('optCopyLegal').checked;
     closeModal();copyAll(chosen);
   }
   else buildShareLink(chosen);
@@ -1904,7 +1891,6 @@ function modalConfirm(){
 function copyAll(chosen){
   if(!chosen.length||!USER)return;
   let text='';chosen.forEach((plan,i)=>{text+=copyPlanText(plan,USER,PLANS.indexOf(plan)+1,COPY_OPTS);if(i<chosen.length-1)text+='\n'+'─'.repeat(40)+'\n';});
-  if(COPY_OPTS.legalNotes)text+='\n'+'─'.repeat(40)+'\n\n'+buildLegalNotesText()+'\n';
   const fb=()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(_){}document.body.removeChild(ta);};
   if(navigator.clipboard?.writeText)navigator.clipboard.writeText(text).then(()=>{}).catch(fb);else fb();
   showToast(`✅ تم نسخ ${chosen.length} خطة`);
@@ -1921,7 +1907,6 @@ function openCopyAllModal(){
   document.getElementById('optCopyTables').checked=COPY_OPTS.tables;
   document.getElementById('optCopyExplain').checked=COPY_OPTS.planExplain;
   document.getElementById('optCopyCatTrans').checked=COPY_OPTS.catExplain;
-  document.getElementById('optCopyLegal').checked=COPY_OPTS.legalNotes;
   /* إزالة زر الطباعة إن وُجد من وضع PDF السابق */
   const old=document.getElementById('modalPrintBtn');if(old)old.remove();
   renderModal();
