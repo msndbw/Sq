@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>جداول التقاعد الاختياري — القانون رقم 18 لسنة 2023</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<link rel="manifest" href="#" id="pwaManifest">
+<meta name="theme-color" content="#0a4a3a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="تقاعدي">
+<style>
+/* ══════════════════════════════════════════════
+   TOKENS
+══════════════════════════════════════════════ */
+:root{
+  --p:#0a4a3a;   /* primary dark teal */
+  --p2:#0d5c4a;  /* primary mid */
+  --p3:#117a62;  /* primary bright */
+  --p4:#17a882;  /* primary light */
+  --p-bg:#eaf5f1;
+  --p-pale:#f3faf7;
+
+  --g:#b8860b;   /* gold dark */
+  --g2:#d4a017;  /* gold mid */
+  --g3:#f0c030;  /* gold bright */
+  --g-bg:#fef9ec;
+  --g-pale:#fffdf5;
+
+  --red:#c0392b; --red-bg:#fdf3f2;
+  --amber:#c97a00; --amber-bg:#fff8ed;
+  --green:#147a50; --green2:#1ca870; --green-bg:#edfaf4;
+  --blue:#1d4ed8; --blue-bg:#eff6ff;
+
+  --ink:#141210;
+  --ink2:#3a3530;
+  --muted:#7c736a;
+  --muted2:#b8a898;
+  --bg:#f4f6f5;
+  --bg2:#eaeeec;
+  --white:#ffffff;
+  --brd:rgba(10,74,58,.12);
+  --brd2:rgba(20,18,16,.08);
+  --sh1:0 1px 8px rgba(0,0,0,.07);
+  --sh2:0 4px 20px rgba(0,0,0,.10);
+  --sh3:0 10px 40px rgba(0,0,0,.14);
+  --r:10px; --rl:14px;
+  --font:'IBM Plex Sans Arabic',sans-serif;
+  --serif:'Amiri',serif;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.65;font-size:15px}
+
+/* ── HEADER ───────────────────────────────────── */
+header{
+  background:var(--p);
+  position:sticky;top:0;z-index:200;
+  box-shadow:0 2px 16px rgba(0,0,0,.3);
+}
+header::after{
+  content:'';display:block;height:3px;
+  background:linear-gradient(90deg,var(--p3) 0%,var(--g3) 40%,var(--g2) 60%,var(--p3) 100%);
+}
+.hdr{max-width:920px;margin:0 auto;display:flex;align-items:center;gap:13px;padding:12px 18px}
+.hdr-logo{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--g),var(--g3));
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+  box-shadow:0 2px 8px rgba(0,0,0,.3);
+}
+.hdr-text h1{font-family:var(--serif);font-size:1.05rem;font-weight:700;color:#fff;line-height:1.2}
+.hdr-text p{font-size:.62rem;color:rgba(255,255,255,.65);margin-top:1px;font-weight:300}
+.hdr-badge{
+  margin-right:auto;flex-shrink:0;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  color:var(--g3);font-size:.58rem;font-weight:700;
+  padding:4px 11px;border-radius:20px;letter-spacing:.08em;white-space:nowrap;
+}
+
+/* ── MAIN ─────────────────────────────────────── */
+main{max-width:920px;margin:0 auto;padding:20px 16px 100px}
+
+/* ── INPUT CARD ───────────────────────────────── */
+.inp-card{
+  background:var(--white);border-radius:var(--rl);
+  border:1px solid var(--brd2);box-shadow:var(--sh1);
+  margin-bottom:14px;overflow:hidden;
+}
+.inp-card-head{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 18px;
+  background:linear-gradient(90deg,var(--p) 0%,var(--p2) 100%);
+}
+.inp-head-num{
+  width:26px;height:26px;border-radius:50%;flex-shrink:0;
+  background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;font-weight:800;color:#fff;
+}
+.inp-card-head h2{font-size:.9rem;font-weight:700;color:#fff;flex:1}
+.inp-head-badge{
+  font-size:.58rem;background:rgba(240,192,48,.2);border:1px solid rgba(240,192,48,.35);
+  color:var(--g3);padding:3px 9px;border-radius:12px;font-weight:700;letter-spacing:.05em;
+}
+.inp-body{padding:18px}
+
+/* ── FORM GRID ────────────────────────────────── */
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field-lbl{
+  font-size:.71rem;font-weight:600;color:var(--p);
+  display:flex;align-items:center;gap:5px;flex-wrap:wrap;
+}
+.field-lbl .req{color:var(--red);font-size:.75rem}
+.field-lbl .opt{
+  font-weight:400;color:var(--muted2);font-size:.6rem;
+  background:var(--bg2);padding:1px 7px;border-radius:10px;
+}
+.field-hint{font-size:.62rem;color:var(--muted);line-height:1.4}
+
+.ctrl{
+  height:44px;border:1.5px solid var(--bg2);border-radius:8px;
+  padding:0 12px;font-family:var(--font);font-size:.88rem;
+  color:var(--ink);background:var(--bg);outline:none;
+  width:100%;transition:border-color .18s,box-shadow .18s,background .18s;
+  appearance:none;-webkit-appearance:none;
+}
+.ctrl:focus{border-color:var(--p3);box-shadow:0 0 0 3px rgba(17,122,98,.12);background:var(--white)}
+.ctrl:disabled{opacity:.38;cursor:not-allowed}
+select.ctrl{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%230a4a3a'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:left 12px center;padding-left:30px;
+}
+
+/* ── DATE SLOTS ───────────────────────────────── */
+.date-slots{display:flex;gap:7px}
+.date-slot{display:flex;flex-direction:column;gap:4px}
+.slot-year{flex:2.2}.slot-month{flex:2}.slot-day{flex:1.4}
+.slot-pill{
+  font-size:.57rem;font-weight:700;letter-spacing:.05em;text-align:center;
+  padding:3px 5px;border-radius:5px;
+}
+.slot-year .slot-pill{background:rgba(10,74,58,.1);color:var(--p)}
+.slot-month .slot-pill{background:rgba(184,134,11,.1);color:var(--g)}
+.slot-day .slot-pill{background:rgba(29,78,216,.08);color:var(--blue)}
+.slot-day .ctrl:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(29,78,216,.1)}
+
+/* ── SUB GROUP ────────────────────────────────── */
+.sub-group{
+  grid-column:1/-1;border:1px solid var(--brd2);border-radius:10px;
+  padding:14px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;
+  background:var(--bg);
+}
+.sub-title{
+  grid-column:1/-1;font-size:.66rem;font-weight:700;color:var(--p2);
+  letter-spacing:.06em;display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+  padding-bottom:9px;border-bottom:1.5px dashed var(--brd);
+}
+.sub-title .sub-opt{font-weight:400;font-size:.6rem;letter-spacing:0;color:var(--muted)}
+
+/* ── RADIO TOGGLE ─────────────────────────────── */
+.radio-row{
+  display:inline-flex;background:var(--bg2);border-radius:8px;padding:3px;gap:3px;
+}
+.radio-opt{
+  display:flex;align-items:center;gap:6px;cursor:pointer;
+  padding:7px 16px;border-radius:6px;transition:all .15s;
+  font-size:.83rem;font-weight:600;color:var(--muted);
+}
+.radio-opt input{display:none}
+.radio-opt.active{background:var(--white);color:var(--p);box-shadow:var(--sh1)}
+
+/* ── TOOLBAR ──────────────────────────────────── */
+.toolbar{
+  display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;
+  padding:14px 16px;background:var(--white);border-radius:var(--rl);
+  border:1px solid var(--brd2);box-shadow:var(--sh1);
+}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:10px 18px;border-radius:8px;border:1.5px solid transparent;
+  font-family:var(--font);font-size:.83rem;font-weight:600;
+  cursor:pointer;transition:all .18s;white-space:nowrap;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-generate{
+  background:var(--p);color:#fff;border-color:var(--p);
+  box-shadow:0 3px 12px rgba(10,74,58,.3);flex:1;
+  justify-content:center;padding:12px 22px;font-size:.9rem;font-weight:700;
+}
+.btn-generate:hover{background:var(--p2);box-shadow:0 5px 18px rgba(10,74,58,.4)}
+.btn-pdf{background:var(--g-bg);color:var(--g);border-color:rgba(184,134,11,.25)}
+.btn-pdf:hover{background:var(--g2);color:#fff;border-color:var(--g2)}
+.btn-share{background:var(--blue-bg);color:var(--blue);border-color:rgba(29,78,216,.2)}
+.btn-share:hover{background:var(--blue);color:#fff}
+.btn-copyall{background:var(--bg);color:var(--ink2);border-color:var(--brd2)}
+.btn-copyall:hover{background:var(--bg2)}
+.btn-print{background:var(--bg);color:var(--ink2);border-color:var(--brd2)}
+.btn-print:hover{background:var(--bg2)}
+.btn-reset{background:var(--bg);color:var(--muted);border-color:var(--brd2)}
+.btn-reset:hover{background:var(--red-bg);color:var(--red);border-color:rgba(192,57,43,.2)}
+.btn-dl{background:var(--p);color:#fff;border-color:var(--p);box-shadow:0 3px 10px rgba(10,74,58,.25)}
+
+/* ── VALIDATION ───────────────────────────────── */
+.al{
+  display:none;align-items:flex-start;gap:9px;
+  padding:11px 14px;border-radius:9px;margin-bottom:12px;
+  font-size:.79rem;line-height:1.5;border:1.5px solid transparent;
+}
+.al.show{display:flex}
+.al-e{background:var(--red-bg);border-color:rgba(192,57,43,.2);color:var(--red)}
+.al-icon{font-size:1rem;flex-shrink:0;margin-top:1px}
+
+/* ══════════════════════════════════════════════
+   RESULTS — SUMMARY BAR
+══════════════════════════════════════════════ */
+.sum-bar{
+  border-radius:var(--rl);margin-bottom:18px;
+  overflow:hidden;border:1px solid var(--brd);
+  box-shadow:var(--sh2);
+  background:var(--p);
+}
+.sum-bar-title{
+  padding:10px 18px 8px;
+  font-size:.62rem;font-weight:700;color:rgba(255,255,255,.55);
+  text-transform:uppercase;letter-spacing:.1em;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.sum-items{display:flex;flex-wrap:wrap}
+.sum-item{
+  flex:1;min-width:130px;padding:12px 16px;
+  border-left:1px solid rgba(255,255,255,.07);
+}
+.sum-item:last-child{border-left:none}
+.si-l{font-size:.56rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.07em;font-weight:600;margin-bottom:4px}
+.si-v{font-size:.92rem;color:#fff;font-weight:700;font-family:var(--serif)}
+
+/* ══════════════════════════════════════════════
+   RESULTS — PLAN CARD (FULL REDESIGN)
+══════════════════════════════════════════════ */
+.plan-card{
+  background:var(--white);border-radius:var(--rl);
+  box-shadow:var(--sh1);border:1px solid var(--brd2);
+  margin-bottom:22px;overflow:hidden;
+  transition:box-shadow .22s,transform .22s;
+  page-break-inside:avoid;
+}
+.plan-card:hover{box-shadow:var(--sh2);transform:translateY(-2px)}
+
+/* Accent colors */
+.ac1 .plan-hdr{background:linear-gradient(135deg,#0a3d6e,#1a5298)}
+.ac2 .plan-hdr{background:linear-gradient(135deg,#064e3b,#065f46)}
+.ac3 .plan-hdr{background:linear-gradient(135deg,#78350f,#92400e)}
+.ac4 .plan-hdr{background:linear-gradient(135deg,#4c1d95,#6d28d9)}
+.ac5 .plan-hdr{background:linear-gradient(135deg,#831843,#9d174d)}
+
+.ac1{border-top:3px solid #3b82f6}
+.ac2{border-top:3px solid var(--p4)}
+.ac3{border-top:3px solid var(--g3)}
+.ac4{border-top:3px solid #8b5cf6}
+.ac5{border-top:3px solid #ec4899}
+
+/* Plan icon backgrounds */
+.plan-icon{width:40px;height:40px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px}
+.ic1{background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.25)}
+.ic2{background:rgba(23,168,130,.15);border:1px solid rgba(23,168,130,.25)}
+.ic3{background:rgba(240,192,48,.15);border:1px solid rgba(240,192,48,.25)}
+.ic4{background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.25)}
+.ic5{background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.25)}
+
+/* ── Plan header ── */
+.plan-hdr{
+  padding:16px 18px;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;
+}
+.plan-hdr-l{display:flex;align-items:center;gap:13px}
+.plan-seq{font-size:.57rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:2px}
+.plan-name{font-family:var(--serif);font-size:1.08rem;font-weight:700;color:#fff;line-height:1.2}
+.plan-desc{font-size:.66rem;color:rgba(255,255,255,.7);margin-top:3px}
+
+/* ── PENSION HERO BAND ── */
+.pension-hero{
+  display:flex;align-items:stretch;
+  background:var(--green-bg);border-bottom:1px solid rgba(20,122,80,.12);
+}
+.pension-main{
+  flex:1;padding:16px 20px;
+  display:flex;flex-direction:column;gap:3px;
+}
+.pension-lbl{font-size:.62rem;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.pension-amount{
+  font-family:var(--serif);font-size:2rem;font-weight:700;
+  color:var(--green);line-height:1;
+}
+.pension-sub{font-size:.67rem;color:rgba(20,122,80,.7);margin-top:2px}
+.pension-side{
+  display:flex;flex-direction:column;
+  border-right:1px solid rgba(20,122,80,.12);
+  padding:12px 16px;gap:6px;justify-content:center;min-width:160px;
+}
+.pension-stat{display:flex;flex-direction:column;gap:2px}
+.ps-l{font-size:.55rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.ps-v{font-size:.88rem;color:var(--ink);font-weight:700}
+
+/* ── Buy badge (when purchase needed) ── */
+.buy-band{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--amber-bg);border-bottom:1px solid rgba(201,122,0,.12);
+  padding:10px 18px;
+}
+.buy-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(201,122,0,.12);border:1px solid rgba(201,122,0,.22);
+  color:var(--amber);border-radius:20px;
+  padding:4px 11px;font-size:.72rem;font-weight:700;
+}
+.buy-detail{font-size:.73rem;color:var(--amber);font-weight:500}
+
+/* ── Plan stats strip ── */
+.plan-stats{
+  display:flex;flex-wrap:wrap;
+  background:var(--bg);border-bottom:1px solid var(--brd2);
+}
+.pst{
+  flex:1;min-width:90px;padding:12px 12px;
+  border-left:1px solid var(--brd2);
+  display:flex;flex-direction:column;gap:3px;text-align:center;
+}
+.pst:last-child{border-left:none}
+.pst-l{font-size:.54rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+.pst-v{font-size:1.02rem;color:var(--p);font-weight:800;font-family:var(--serif)}
+.pst-s{font-size:.58rem;color:var(--muted2)}
+.pst-v.g{color:var(--green)}
+.pst-v.w{color:var(--amber)}
+.pst-v.b{color:var(--red)}
+
+/* ── Plan body ── */
+.plan-body{padding:16px}
+
+.plan-user-row{
+  display:flex;flex-wrap:wrap;gap:9px;padding:8px 12px;
+  margin-bottom:14px;
+  background:var(--p-pale);border-radius:8px;
+  border:1px solid rgba(10,74,58,.1);
+}
+.plan-user-row span{font-size:.69rem;color:var(--p2)}
+.plan-user-row span b{color:var(--p);font-weight:700}
+
+/* ── Detail rows ── */
+.drows{
+  border:1px solid var(--brd2);border-radius:9px;
+  overflow:hidden;margin-bottom:13px;
+}
+.dr{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:8px 14px;font-size:.8rem;gap:10px;
+  border-bottom:1px solid rgba(20,18,16,.04);
+}
+.dr:last-child{border-bottom:none}
+.dr:nth-child(even){background:rgba(10,74,58,.025)}
+.dk{color:var(--muted);font-weight:500;flex-shrink:0}
+.dv{font-weight:700;color:var(--ink);text-align:left}
+.dv.g{color:var(--green);font-size:.93rem}
+.dv.w{color:var(--amber)}
+.dv.b{color:var(--red)}
+
+/* ── Warning pill ── */
+.rpill{
+  display:flex;align-items:center;gap:7px;
+  background:var(--amber-bg);border:1px solid rgba(201,122,0,.2);
+  color:var(--amber);padding:8px 13px;border-radius:8px;
+  font-size:.72rem;font-weight:600;margin-bottom:14px;
+}
+
+/* ── Table ── */
+.tbl-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.tbl-head h4{font-size:.66rem;font-weight:700;color:var(--p);text-transform:uppercase;letter-spacing:.07em}
+.tleg{display:flex;gap:10px;flex-wrap:wrap}
+.tleg-i{display:flex;align-items:center;gap:4px;font-size:.58rem;color:var(--muted);font-weight:600}
+.tdot{width:10px;height:10px;border-radius:3px;border:1px solid transparent}
+.ldy{background:#fef3c7;border-color:var(--amber)}
+.ldg{background:var(--green-bg);border-color:var(--green2)}
+.tbl-wrap{overflow-x:auto;border-radius:9px;border:1px solid var(--brd2);-webkit-overflow-scrolling:touch}
+.ctbl{width:100%;border-collapse:collapse;font-size:.78rem}
+.ctbl thead th{
+  background:var(--p);color:#fff;font-weight:700;font-size:.65rem;
+  text-transform:uppercase;letter-spacing:.06em;padding:9px 14px;text-align:center;
+}
+.ctbl tbody td{padding:6px 14px;text-align:center;border-bottom:1px solid rgba(20,18,16,.04);color:var(--ink)}
+.ctbl tbody tr:nth-child(even) td{background:var(--bg)}
+.ctbl tbody tr.r5 td{background:#fef9e0;font-weight:600}
+.ctbl tbody tr.rret td{background:var(--green-bg);color:var(--green);font-weight:900}
+.cpill{
+  display:inline-block;background:var(--p-bg);color:var(--p);
+  padding:2px 10px;border-radius:20px;font-size:.7rem;font-weight:800;
+  border:1px solid rgba(10,74,58,.18);
+}
+.cpill.c15{background:var(--g-bg);color:var(--g);border-color:rgba(184,134,11,.25)}
+
+/* ── Copy btn ── */
+.copy-btn{
+  padding:7px 13px;border-radius:7px;font-family:var(--font);
+  font-size:.73rem;font-weight:600;cursor:pointer;
+  border:1.5px solid rgba(255,255,255,.25);
+  background:rgba(255,255,255,.12);color:#fff;
+  transition:all .17s;flex-shrink:0;
+}
+.copy-btn:hover{background:rgba(255,255,255,.22)}
+.copy-btn.done{background:var(--green-bg);border-color:var(--green2);color:var(--green)}
+
+/* ── Toast ── */
+#toast{
+  position:fixed;bottom:26px;left:50%;
+  transform:translateX(-50%) translateY(70px);
+  background:var(--p);color:#fff;
+  padding:10px 22px;border-radius:30px;font-size:.82rem;font-weight:700;
+  box-shadow:var(--sh2);opacity:0;pointer-events:none;
+  transition:transform .3s ease,opacity .3s;z-index:9999;
+}
+#toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* ── Bottom nav ── */
+.plan-nav{
+  position:fixed;bottom:0;left:0;right:0;
+  background:var(--p);border-top:2px solid var(--p3);
+  box-shadow:0 -4px 24px rgba(0,0,0,.25);
+  z-index:300;padding:8px 14px;
+  padding-bottom:max(10px,env(safe-area-inset-bottom,10px));
+}
+.plan-nav-wrap{max-width:920px;margin:0 auto;display:flex;align-items:center;gap:9px}
+.pnav-label{font-size:.62rem;font-weight:700;color:var(--g3);white-space:nowrap;flex-shrink:0}
+.plan-nav-inner{display:flex;gap:6px;overflow-x:auto;flex:1;scrollbar-width:none;padding-bottom:1px}
+.plan-nav-inner::-webkit-scrollbar{display:none}
+.pnav-btn{
+  flex-shrink:0;padding:7px 13px;border-radius:7px;
+  font-family:var(--font);font-size:.73rem;font-weight:600;cursor:pointer;
+  border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);
+  color:rgba(255,255,255,.85);transition:all .18s;white-space:nowrap;line-height:1.3;
+}
+.pnav-btn small{display:block;font-size:.57rem;font-weight:400;opacity:.65}
+.pnav-btn:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3)}
+.pnav-btn.active{background:var(--g3);color:var(--p);border-color:var(--g3);font-weight:700;box-shadow:0 2px 8px rgba(240,192,48,.35)}
+.pnav-top{
+  flex-shrink:0;width:34px;height:34px;border-radius:8px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  color:rgba(255,255,255,.8);font-size:.86rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:background .18s;
+}
+.pnav-top:hover{background:rgba(255,255,255,.18)}
+body.has-nav main{padding-bottom:90px}
+
+/* ── Modal ── */
+.modal-overlay{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,.7);
+  display:flex;align-items:center;justify-content:center;padding:16px;
+  animation:fIn .18s ease;
+}
+@keyframes fIn{from{opacity:0}to{opacity:1}}
+.modal{
+  background:var(--white);border-radius:var(--rl);
+  box-shadow:var(--sh3);border:1px solid var(--brd);
+  width:100%;max-width:460px;overflow:hidden;
+  animation:sUp .2s ease;
+}
+@keyframes sUp{from{transform:translateY(22px);opacity:0}to{transform:none;opacity:1}}
+.modal-head{
+  background:var(--p);padding:13px 18px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.modal-head h3{font-family:var(--serif);font-size:1rem;color:#fff;font-weight:700}
+.modal-close{
+  width:28px;height:28px;border-radius:6px;
+  background:rgba(255,255,255,.1);border:none;color:#fff;
+  font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .15s;
+}
+.modal-close:hover{background:rgba(255,255,255,.22)}
+.modal-body{padding:16px 18px}
+.modal-subtitle{font-size:.72rem;color:var(--muted);margin-bottom:12px;line-height:1.5}
+.modal-plans{display:flex;flex-direction:column;gap:8px;margin-bottom:15px}
+.modal-plan-row{
+  display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:9px;
+  border:1.5px solid var(--brd2);cursor:pointer;transition:all .16s;user-select:none;
+  background:var(--bg);
+}
+.modal-plan-row:hover,.modal-plan-row.selected{border-color:var(--p3);background:var(--p-pale);box-shadow:0 2px 8px rgba(10,74,58,.1)}
+.modal-plan-chk{
+  width:20px;height:20px;border-radius:5px;border:2px solid var(--muted2);
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-size:.71rem;transition:all .15s;
+}
+.modal-plan-row.selected .modal-plan-chk{background:var(--p3);border-color:var(--p3);color:#fff}
+.modal-plan-info{flex:1}
+.modal-plan-name{font-weight:700;font-size:.83rem;color:var(--ink)}
+.modal-plan-meta{font-size:.64rem;color:var(--muted);margin-top:1px}
+.modal-plan-pension{font-weight:800;font-size:.85rem;color:var(--green);white-space:nowrap}
+.modal-footer{
+  padding:11px 18px 15px;display:flex;gap:8px;justify-content:flex-end;
+  border-top:1px solid var(--brd2);
+}
+.modal-select-all{
+  margin-right:auto;background:none;border:1.5px solid var(--brd2);
+  border-radius:7px;padding:8px 13px;font-family:var(--font);
+  font-size:.74rem;font-weight:700;color:var(--ink);cursor:pointer;transition:all .15s;
+}
+.modal-select-all:hover{border-color:var(--p3);color:var(--p)}
+.btn-modal-confirm{
+  background:var(--p);color:#fff;border:none;border-radius:8px;
+  padding:9px 20px;font-family:var(--font);font-size:.84rem;font-weight:700;
+  cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:6px;
+}
+.btn-modal-confirm:hover{background:var(--p2);transform:translateY(-1px);box-shadow:var(--sh2)}
+.btn-modal-cancel{
+  background:var(--bg2);border:none;border-radius:8px;padding:9px 15px;
+  font-family:var(--font);font-size:.84rem;font-weight:600;
+  color:var(--ink);cursor:pointer;transition:background .15s;
+}
+.btn-modal-cancel:hover{background:var(--bg)}
+.share-link-box{
+  background:var(--bg);border:1.5px solid var(--brd2);border-radius:8px;
+  padding:10px 12px;margin-top:11px;font-size:.72rem;font-family:monospace;
+  color:var(--p2);word-break:break-all;direction:ltr;text-align:left;
+}
+.share-copy-btn{
+  width:100%;margin-bottom:8px;background:var(--p3);color:#fff;
+  border:none;border-radius:7px;padding:10px 8px;font-family:var(--font);
+  font-size:.87rem;font-weight:700;cursor:pointer;transition:all .15s;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.share-copy-btn:hover{background:var(--p2);transform:translateY(-1px)}
+.share-copy-btn.copied{background:var(--p)}
+.share-wa-btn{
+  background:#22c55e;color:#fff;border:none;border-radius:7px;
+  padding:10px 13px;cursor:pointer;transition:all .15s;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.share-wa-btn:hover{background:#16a34a;transform:translateY(-1px)}
+
+/* ── Viewer ── */
+#actionBar{
+  display:none;gap:10px;flex-wrap:wrap;margin-bottom:18px;
+  padding:14px 18px;background:var(--white);border-radius:var(--rl);
+  border:1px solid var(--brd);box-shadow:var(--sh1);align-items:center;
+}
+.share-info-badge{
+  display:flex;align-items:center;gap:8px;flex:1;font-size:.79rem;
+  color:var(--ink);background:var(--p-pale);padding:8px 13px;border-radius:8px;
+  border-right:3px solid var(--p3);min-width:0;word-break:break-word;
+}
+.share-info-badge b{color:var(--p);font-size:.85rem}
+#loadingState{text-align:center;padding:70px 18px}
+.loader-ring{
+  width:50px;height:50px;border:4px solid var(--bg2);
+  border-top-color:var(--p3);border-radius:50%;
+  animation:spin .8s linear infinite;margin:0 auto 18px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+#loadingState p{color:var(--muted);font-size:.86rem}
+#errorState{display:none;text-align:center;padding:70px 18px}
+.error-icon{font-size:3.5rem;margin-bottom:14px}
+#errorState h2{font-family:var(--serif);color:var(--p);margin-bottom:7px;font-size:1.35rem}
+#errorState p{color:var(--muted);font-size:.85rem;line-height:1.7}
+.viewer-footer{
+  text-align:center;padding:22px 18px;color:var(--muted2);
+  font-size:.67rem;border-top:1px solid var(--brd2);margin-top:28px;
+}
+.viewer-footer a{color:var(--p3);font-weight:700;text-decoration:none}
+.viewer-footer a:hover{color:var(--g2)}
+
+/* ── Plan explanation / category transition sections ── */
+.plan-explain-block,.cat-transition-block{display:none;margin-top:14px;padding:12px 14px;background:var(--p-pale);border:1px solid var(--brd);border-radius:10px}
+body.show-explain .plan-explain-block,body.show-explain .cat-transition-block{display:block}
+.explain-title{font-weight:700;color:var(--p);font-size:.8rem;margin-bottom:6px}
+.explain-text p{font-size:.75rem;color:var(--ink2);margin-bottom:4px;line-height:1.7}
+.explain-toggle-lbl{display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--ink2);cursor:pointer;padding:6px 10px;background:var(--white);border:1px solid var(--brd);border-radius:8px}
+.explain-toggle-lbl input{width:15px;height:15px;accent-color:var(--p3);cursor:pointer}
+.copy-opt-row{display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--ink2);margin-bottom:6px;cursor:pointer}
+.copy-opt-row input{width:15px;height:15px;accent-color:var(--p3);cursor:pointer}
+#copyOptionsBox{padding:10px 12px;background:var(--g-pale);border:1px solid rgba(180,140,20,.2);border-radius:10px}
+
+/* ── Print ── */
+@media print{
+  .no-print{display:none!important}
+  body{background:#fff}
+  header{background:var(--p)!important;position:static;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .plan-card{page-break-inside:avoid;box-shadow:none;border:1px solid #ddd;transform:none}
+  main{padding:0}
+  .sum-bar,.plan-stats,.ctbl thead,.ctbl .r5 td,.ctbl .rret td,.pension-hero,.plan-icon{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
+/* ── Responsive ── */
+@media(max-width:480px){
+  .hdr-badge{display:none}
+  main{padding:12px 11px 85px}
+  .inp-body{padding:13px}
+  .form-grid{grid-template-columns:1fr;gap:12px}
+  .sub-group{grid-template-columns:1fr;padding:11px}
+  .date-slots{gap:5px}
+  .toolbar{gap:6px}
+  .btn{padding:9px 12px;font-size:.8rem}
+  .btn-generate{padding:11px 18px;font-size:.88rem}
+  .sum-items{flex-direction:column}
+  .sum-item{border-left:none;border-bottom:1px solid rgba(255,255,255,.07)}
+  .plan-stats{flex-direction:column}
+  .pst{border-left:none;border-bottom:1px solid var(--brd2)}
+  .pension-hero{flex-direction:column}
+  .pension-side{border-right:none;border-top:1px solid rgba(20,122,80,.12);flex-direction:row;flex-wrap:wrap;gap:14px}
+  .plan-body{padding:13px}
+  .dr{font-size:.77rem;flex-wrap:wrap;gap:3px}
+  .dv{text-align:right}
+  .modal{border-radius:14px 14px 0 0;max-height:90vh;overflow-y:auto}
+  .modal-overlay{align-items:flex-end;padding:0}
+  .modal-body{padding:12px 13px}
+  .modal-footer{padding:9px 13px 18px;flex-wrap:wrap}
+  .modal-footer .btn-modal-confirm,.modal-footer .btn-modal-cancel{flex:1;justify-content:center}
+  #actionBar{flex-direction:column;align-items:stretch}
+  #actionBar .btn{justify-content:center;width:100%}
+}
+@media(min-width:481px) and (max-width:768px){
+  .hdr-badge{display:none}
+  main{padding:14px 13px 85px}
+  .form-grid{grid-template-columns:repeat(2,1fr)}
+  .sub-group{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ══════════════════════════════════════════════
+   NEW FEATURES CSS
+══════════════════════════════════════════════ */
+
+/* ── Progress Section ── */
+.progress-section{
+  background:var(--white);border-radius:var(--rl);
+  border:1px solid var(--brd2);box-shadow:var(--sh1);
+  margin-bottom:16px;overflow:hidden;
+}
+.progress-head{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 18px;
+  background:linear-gradient(90deg,var(--p) 0%,var(--p2) 100%);
+}
+.progress-head h3{font-size:.88rem;font-weight:700;color:#fff;flex:1}
+.progress-body{padding:16px 18px}
+.prog-plans{display:flex;flex-direction:column;gap:10px}
+.prog-plan{display:flex;flex-direction:column;gap:5px}
+.prog-plan-lbl{
+  display:flex;justify-content:space-between;
+  font-size:.73rem;font-weight:600;color:var(--ink2);
+}
+.prog-plan-lbl .prog-name{color:var(--p);font-weight:700}
+.prog-plan-lbl .prog-pct{
+  color:var(--green);font-weight:800;font-size:.78rem;
+}
+.prog-bar-track{
+  height:10px;background:var(--bg2);border-radius:20px;overflow:hidden;
+}
+.prog-bar-fill{
+  height:100%;border-radius:20px;transition:width .6s ease;
+  background:linear-gradient(90deg,var(--p3),var(--p4));
+}
+.prog-bar-fill.done{background:linear-gradient(90deg,var(--green),var(--green2))}
+.prog-bar-fill.warn{background:linear-gradient(90deg,var(--amber),#f59e0b)}
+.prog-plan-meta{
+  display:flex;gap:14px;flex-wrap:wrap;font-size:.65rem;color:var(--muted);
+}
+.prog-plan-meta span b{color:var(--ink2)}
+.prog-divider{border:none;border-top:1px dashed var(--brd2);margin:4px 0}
+
+/* ── Comparison Table ── */
+.cmp-section{
+  background:var(--white);border-radius:var(--rl);
+  border:1px solid var(--brd2);box-shadow:var(--sh1);
+  margin-bottom:16px;overflow:hidden;
+}
+.cmp-head{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 18px;
+  background:linear-gradient(90deg,var(--navy4,#1e3d6e) 0%,var(--p3) 100%);
+}
+.cmp-head h3{font-size:.88rem;font-weight:700;color:#fff;flex:1}
+.cmp-body{padding:0;overflow-x:auto}
+.cmp-tbl{width:100%;border-collapse:collapse;font-size:.79rem}
+.cmp-tbl thead th{
+  background:var(--p);color:#fff;font-weight:700;
+  font-size:.65rem;text-transform:uppercase;letter-spacing:.05em;
+  padding:9px 14px;text-align:center;border-left:1px solid rgba(255,255,255,.1);
+}
+.cmp-tbl thead th:first-child{border-left:none;text-align:right}
+.cmp-tbl tbody td{
+  padding:9px 14px;text-align:center;border-bottom:1px solid var(--brd2);
+  border-left:1px solid rgba(20,18,16,.04);color:var(--ink);font-weight:500;
+}
+.cmp-tbl tbody td:first-child{text-align:right;font-weight:700;color:var(--p);border-left:none}
+.cmp-tbl tbody tr:last-child td{border-bottom:none}
+.cmp-tbl tbody tr:nth-child(even) td{background:var(--bg)}
+.cmp-best{background:var(--green-bg)!important;color:var(--green)!important;font-weight:900!important}
+.cmp-worst{background:var(--red-bg)!important;color:var(--red)!important}
+.cmp-lbl{
+  font-size:.58rem;display:block;font-weight:400;
+  color:var(--muted);margin-top:1px;
+}
+.cmp-plan-badge{
+  display:inline-block;padding:2px 9px;border-radius:12px;
+  font-size:.67rem;font-weight:800;background:var(--p-bg);color:var(--p);
+  border:1px solid rgba(10,74,58,.15);
+}
+
+/* ── Lifetime & What-if Section ── */
+.extra-section{
+  background:var(--white);border-radius:var(--rl);
+  border:1px solid var(--brd2);box-shadow:var(--sh1);
+  margin-bottom:16px;overflow:hidden;
+}
+.extra-head{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 18px;
+  background:linear-gradient(90deg,#78350f 0%,#92400e 100%);
+}
+.extra-head h3{font-size:.88rem;font-weight:700;color:#fff;flex:1}
+.extra-body{padding:16px 18px}
+.extra-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.extra-card{
+  background:var(--bg);border:1px solid var(--brd2);
+  border-radius:10px;padding:13px;
+}
+.extra-card-lbl{font-size:.6rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
+.extra-card-val{font-size:1.05rem;font-weight:800;color:var(--p);font-family:var(--serif)}
+.extra-card-sub{font-size:.62rem;color:var(--muted);margin-top:3px}
+.extra-card.highlight{background:var(--green-bg);border-color:rgba(20,122,80,.2)}
+.extra-card.highlight .extra-card-val{color:var(--green)}
+.extra-card.warn{background:var(--amber-bg);border-color:rgba(217,119,6,.2)}
+.extra-card.warn .extra-card-val{color:var(--amber)}
+
+/* ── What-if slider ── */
+.whatif-section{
+  background:var(--white);border-radius:var(--rl);
+  border:1px solid var(--brd2);box-shadow:var(--sh1);
+  margin-bottom:16px;overflow:hidden;
+}
+.whatif-head{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 18px;
+  background:linear-gradient(90deg,#4c1d95,#6d28d9);
+}
+.whatif-head h3{font-size:.88rem;font-weight:700;color:#fff;flex:1}
+.whatif-body{padding:16px 18px}
+.whatif-lbl{font-size:.72rem;font-weight:600;color:var(--ink2);margin-bottom:8px}
+.whatif-slider{width:100%;margin-bottom:10px;accent-color:var(--p3)}
+.whatif-result{
+  display:flex;flex-wrap:wrap;gap:10px;
+  padding:11px 14px;background:var(--p-pale);
+  border:1px solid rgba(10,74,58,.12);border-radius:9px;
+}
+.wr-item{display:flex;flex-direction:column;gap:2px}
+.wr-l{font-size:.57rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.wr-v{font-size:.92rem;font-weight:800;color:var(--p)}
+.wr-v.up{color:var(--green)}
+.wr-v.down{color:var(--red)}
+
+/* ── Category threshold alert ── */
+.cat-alert{
+  display:flex;align-items:flex-start;gap:9px;
+  padding:10px 14px;border-radius:9px;margin-bottom:12px;
+  background:var(--p-pale);border:1.5px solid rgba(10,74,58,.15);
+  font-size:.75rem;font-weight:600;color:var(--p2);
+  page-break-inside:avoid;
+}
+.cat-alert-icon{font-size:1.1rem;flex-shrink:0}
+
+/* ── Pocket Card ── */
+.pocket-btn{
+  background:var(--bg);color:var(--p);
+  border:1.5px solid var(--brd);border-radius:8px;
+  padding:7px 13px;font-family:var(--font);font-size:.72rem;font-weight:700;
+  cursor:pointer;transition:all .17s;flex-shrink:0;
+}
+.pocket-btn:hover{background:var(--p);color:#fff}
+.pocket-card-overlay{
+  position:fixed;inset:0;z-index:2000;
+  background:rgba(0,0,0,.75);
+  display:flex;align-items:center;justify-content:center;padding:18px;
+}
+.pocket-card{
+  background:var(--white);border-radius:12px;
+  box-shadow:var(--sh3);max-width:340px;width:100%;overflow:hidden;
+}
+.pocket-card-body{
+  background:linear-gradient(135deg,var(--p),var(--p2));
+  padding:20px;color:#fff;
+}
+.pocket-card-body h2{font-family:var(--serif);font-size:1.1rem;margin-bottom:3px}
+.pocket-card-body p{font-size:.7rem;opacity:.7;margin-bottom:14px}
+.pk-rows{display:flex;flex-direction:column;gap:7px}
+.pk-row{display:flex;justify-content:space-between;align-items:center;font-size:.8rem}
+.pk-k{opacity:.75}
+.pk-v{font-weight:800;font-size:.88rem}
+.pk-v.big{font-size:1.1rem;color:var(--g3)}
+.pocket-card-foot{
+  padding:12px 16px;display:flex;gap:8px;justify-content:flex-end;
+  border-top:1px solid var(--brd2);
+}
+.pk-close{
+  background:var(--bg);border:1px solid var(--brd2);border-radius:7px;
+  padding:8px 15px;font-family:var(--font);font-size:.8rem;font-weight:600;
+  color:var(--ink);cursor:pointer;transition:background .15s;
+}
+.pk-close:hover{background:var(--bg2)}
+.pk-share-img{
+  background:var(--p);color:#fff;border:none;border-radius:7px;
+  padding:8px 15px;font-family:var(--font);font-size:.8rem;font-weight:700;
+  cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .15s;
+}
+.pk-share-img:hover{background:var(--p2)}
+
+/* ── localStorage indicator ── */
+.saved-pill{
+  display:inline-flex;align-items:center;gap:4px;
+  background:var(--green-bg);border:1px solid rgba(20,122,80,.2);
+  color:var(--green);font-size:.6rem;font-weight:700;
+  padding:2px 9px;border-radius:12px;vertical-align:middle;
+  transition:opacity .4s;
+}
+.saved-pill.fade{opacity:0}
+
+/* ── PWA install banner ── */
+.pwa-banner{
+  display:none;position:fixed;bottom:90px;right:16px;z-index:500;
+  background:var(--p);color:#fff;border-radius:var(--r);
+  padding:11px 15px;box-shadow:var(--sh2);
+  max-width:260px;font-size:.76rem;
+  border:1px solid rgba(240,192,48,.3);
+}
+.pwa-banner.show{display:flex;align-items:center;gap:9px}
+.pwa-banner button{
+  background:var(--g3);color:var(--p);border:none;
+  border-radius:6px;padding:5px 11px;font-family:var(--font);
+  font-size:.73rem;font-weight:800;cursor:pointer;flex-shrink:0;
+}
+
+@media(max-width:480px){
+  .extra-grid{grid-template-columns:1fr}
+  .cmp-tbl{font-size:.72rem}
+  .cmp-tbl thead th,.cmp-tbl tbody td{padding:7px 10px}
+}
+/* ── end new features css ── */
+#appSection{display:block}
+body.viewer-mode #appSection{display:none}
+body.viewer-mode #viewerSection{display:block}
+</style>
+</head>
+<body>
+
+<!-- ══════════════ APP SECTION ══════════════ -->
+<div id="appSection">
+
+<header>
+  <div class="hdr">
+    <div class="hdr-logo">🏛️</div>
+    <div class="hdr-text">
+      <h1>جداول التقاعد الاختياري</h1>
+      <p>احتساب الراتب التقاعدي — القانون رقم 18 لسنة 2023</p>
+    </div>
+    <div class="hdr-badge no-print">النظام الرسمي</div>
+  </div>
+</header>
+
+<main>
+
+<!-- بيانات المشترك -->
+<div class="inp-card no-print">
+  <div class="inp-card-head">
+    <div class="inp-head-num">١</div>
+    <h2>بيانات المشترك</h2>
+    <span class="inp-head-badge">المعلومات الأساسية</span>
+  </div>
+  <div class="inp-body">
+    <div class="form-grid">
+
+      <div class="field">
+        <div class="field-lbl">الاسم الكامل <span class="opt">اختياري</span></div>
+        <input class="ctrl" type="text" id="nameInput" placeholder="مثال: أحمد محمد علي">
+      </div>
+
+      <div class="field">
+        <div class="field-lbl">الجنس <span class="req">*</span></div>
+        <select class="ctrl" id="genderSelect">
+          <option value="">— اختر الجنس —</option>
+          <option value="male">ذكر</option>
+          <option value="female">أنثى</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <div class="field-lbl">تاريخ الميلاد <span class="req">*</span></div>
+        <div class="date-slots">
+          <div class="date-slot slot-year"><div class="slot-pill">السنة</div><select class="ctrl" id="birthYear" onchange="onYearChange('birth')"></select></div>
+          <div class="date-slot slot-month"><div class="slot-pill">الشهر</div><select class="ctrl" id="birthMonth" disabled onchange="onMonthChange('birth')"></select></div>
+          <div class="date-slot slot-day"><div class="slot-pill">اليوم</div><select class="ctrl" id="birthDay" disabled></select></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-lbl">الفئة الحالية <span class="opt">اختياري</span></div>
+        <select class="ctrl" id="currentCategory"></select>
+        <div class="field-hint">إذا تُرك فارغاً تُحسب الفئة تلقائياً</div>
+      </div>
+
+      <div class="field" style="grid-column:1/-1">
+        <div class="field-lbl">الاستقرار على فئة محددة قبل التقاعد؟</div>
+        <div style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;align-items:center">
+          <div class="radio-row">
+            <label class="radio-opt active">
+              <input type="radio" name="fixedCatOpt" id="fixedCatNo" value="no" checked>
+              لا
+            </label>
+            <label class="radio-opt">
+              <input type="radio" name="fixedCatOpt" id="fixedCatYes" value="yes">
+              نعم
+            </label>
+          </div>
+          <div id="fixedCatSelectWrap" style="display:none;flex:1;min-width:200px">
+            <select class="ctrl" id="fixedCatSelect">
+              <option value="">— اختر الفئة المستهدفة —</option>
+              <option value="1">الفئة الأولى — 350,000 د.ع</option>
+              <option value="2">الفئة الثانية — 455,000 د.ع</option>
+              <option value="3">الفئة الثالثة — 560,000 د.ع</option>
+              <option value="4">الفئة الرابعة — 665,000 د.ع</option>
+              <option value="5">الفئة الخامسة — 770,000 د.ع</option>
+              <option value="6">الفئة السادسة — 875,000 د.ع</option>
+              <option value="7">الفئة السابعة — 980,000 د.ع</option>
+              <option value="8">الفئة الثامنة — 1,085,000 د.ع</option>
+              <option value="9">الفئة التاسعة — 1,190,000 د.ع</option>
+              <option value="10">الفئة العاشرة — 1,295,000 د.ع</option>
+              <option value="11">الفئة الحادية عشر — 1,400,000 د.ع</option>
+              <option value="12">الفئة الثانية عشر — 1,505,000 د.ع</option>
+              <option value="13">الفئة الثالثة عشر — 1,610,000 د.ع</option>
+              <option value="14">الفئة الرابعة عشر — 1,715,000 د.ع</option>
+              <option value="15">الفئة الخامسة عشر — 1,750,000 د.ع</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-hint" style="margin-top:6px">إذا اخترت نعم، ستُحسب آخر 5 سنوات قبل التقاعد جميعها بالفئة المختارة</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- بيانات الخدمة -->
+<div class="inp-card no-print">
+  <div class="inp-card-head">
+    <div class="inp-head-num">٢</div>
+    <h2>بيانات الخدمة</h2>
+    <span class="inp-head-badge">الانتساب والخدمة السابقة</span>
+  </div>
+  <div class="inp-body">
+    <div class="form-grid">
+
+      <div class="sub-group">
+        <div class="sub-title">📅 تاريخ الانتساب <span class="sub-opt">(اختياري — يبدأ الحساب من العمر الحالي عند تركه فارغاً)</span></div>
+        <div class="field" style="grid-column:1/-1">
+          <div class="date-slots">
+            <div class="date-slot slot-year"><div class="slot-pill">السنة</div><select class="ctrl" id="joinYear" onchange="onYearChange('join')"></select></div>
+            <div class="date-slot slot-month"><div class="slot-pill">الشهر</div><select class="ctrl" id="joinMonth" disabled onchange="onMonthChange('join')"></select></div>
+            <div class="date-slot slot-day"><div class="slot-pill">اليوم</div><select class="ctrl" id="joinDay" disabled></select></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-group">
+        <div class="sub-title">🗂️ الخدمة السابقة <span class="sub-opt">(مطلوب إذا كان العمر ≥ 50 ولا يوجد تاريخ انتساب)</span></div>
+        <div class="field">
+          <div class="field-lbl">عدد السنوات</div>
+          <input class="ctrl" type="number" id="priorYears" min="0" max="40" placeholder="0">
+        </div>
+        <div class="field">
+          <div class="field-lbl">عدد الأشهر</div>
+          <input class="ctrl" type="number" id="priorMonths" min="0" max="11" placeholder="0">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- شريط الأدوات -->
+<div class="no-print">
+  <div class="toolbar">
+    <button class="btn btn-generate" id="calcBtn">⚙️ إنشاء الخطط التقاعدية</button>
+    <button class="btn btn-pdf"     id="pdfBtn"     style="display:none">📄 تصدير PDF</button>
+    <button class="btn btn-share"   id="shareBtn"   style="display:none">🔗 مشاركة كرابط</button>
+    <button class="btn btn-copyall" id="copyAllBtn" style="display:none">📋 نسخ الكل</button>
+    <button class="btn btn-print"   id="printBtn">🖨️ طباعة</button>
+    <button class="btn btn-reset"   id="resetBtn">🔄 تهيئة</button>
+    <span id="savedPill" class="saved-pill fade" style="margin-right:auto">💾 محفوظ</span>
+  </div>
+  <label class="explain-toggle-lbl" id="explainToggleWrap" style="display:none;margin:0 auto 12px;max-width:920px">
+    <input type="checkbox" id="explainToggle">
+    ☑️ إرفاق شرح الخطط مع النتائج
+  </label>
+</div>
+
+<div id="results"></div>
+</main>
+
+<div id="toast"></div>
+
+<div id="planNav" class="plan-nav no-print" style="display:none">
+  <div class="plan-nav-wrap">
+    <span class="pnav-label">🗂️ انتقل:</span>
+    <div class="plan-nav-inner" id="planNavBtns"></div>
+    <button class="pnav-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆</button>
+  </div>
+</div>
+
+<div id="planSelectorModal" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modalTitle">📄 اختر الخطط للتصدير</h3>
+      <button class="modal-close" id="modalCloseBtn">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-subtitle" id="modalSubtitle">اختر الخطط التي تريد تضمينها</div>
+      <div id="copyOptionsBox" style="display:none;margin-bottom:12px">
+        <div style="font-size:.72rem;color:var(--p);font-weight:700;margin-bottom:6px">📋 محتوى النسخ:</div>
+        <label class="copy-opt-row"><input type="checkbox" id="optCopyTables" checked> نسخ الجداول</label>
+        <label class="copy-opt-row"><input type="checkbox" id="optCopyExplain"> إرفاق شرح الخطط</label>
+        <label class="copy-opt-row"><input type="checkbox" id="optCopyCatTrans"> إرفاق شرح الانتقال بين الفئات</label>
+        <label class="copy-opt-row"><input type="checkbox" id="optCopyLegal"> إرفاق الملاحظات القانونية</label>
+      </div>
+      <div class="modal-plans" id="modalPlansList"></div>
+      <div id="shareLinkContainer" style="display:none">
+        <div style="background:var(--p-pale);border:1.5px solid rgba(10,74,58,.15);border-radius:10px;padding:12px 14px;margin-bottom:10px">
+          <div style="font-size:.75rem;color:var(--p);font-weight:700;margin-bottom:6px">🔗 رابط المشاركة</div>
+          <div class="share-link-box" id="shareLinkBox" style="cursor:pointer;user-select:all"></div>
+          <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+            <button class="share-copy-btn" id="shareLinkCopyBtn" style="flex:1;min-width:120px;margin-bottom:0">📋 نسخ الرابط</button>
+            <button class="share-wa-btn" id="shareWABtn" title="مشاركة عبر واتساب" style="min-width:48px">
+              <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16 2C8.28 2 2 8.28 2 16c0 2.44.65 4.73 1.78 6.72L2 30l7.47-1.76A13.93 13.93 0 0016 30c7.72 0 14-6.28 14-14S23.72 2 16 2zm7.16 19.34c-.3.84-1.76 1.6-2.42 1.7-.6.09-1.37.13-2.2-.14a20.1 20.1 0 01-2-.74c-3.5-1.5-5.8-5.06-5.97-5.3-.17-.22-1.38-1.84-1.38-3.5 0-1.67.87-2.49 1.18-2.83.3-.34.66-.43.88-.43l.63.01c.2 0 .47-.08.74.56.28.66.94 2.3 1.02 2.47.08.17.14.37.03.6-.11.22-.17.36-.33.55-.17.2-.35.44-.5.59-.17.17-.34.35-.15.68.2.34.87 1.43 1.87 2.32 1.28 1.14 2.36 1.5 2.7 1.66.33.17.53.14.72-.08.2-.22.84-.98 1.07-1.32.22-.33.44-.28.74-.17.3.11 1.9.9 2.23 1.06.33.17.55.25.63.39.08.14.08.8-.22 1.63z"/></svg>
+            </button>
+          </div>
+        </div>
+        <div style="font-size:.65rem;color:var(--muted);text-align:center;line-height:1.5">
+          🔗 <a href="https://linktr.ee/Daman2026" target="_blank" rel="noopener noreferrer" style="color:var(--p3);font-weight:700">للمزيد من المعلومات اضغط هنا</a>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-select-all" id="modalSelectAll">تحديد الكل</button>
+      <button class="btn-modal-cancel" id="modalCancelBtn">إلغاء</button>
+      <button class="btn-modal-confirm" id="modalConfirmBtn">📄 تصدير</button>
+    </div>
+  </div>
+</div>
+
+<div id="pwa-banner" class="pwa-banner">
+  📲 <span>ثبّت التطبيق على شاشتك</span>
+  <button onclick="installPWA()">تثبيت</button>
+</div>
+
+<div id="pocket-overlay" style="display:none" class="pocket-card-overlay">
+  <div class="pocket-card">
+    <div class="pocket-card-body" id="pocketCardInner"></div>
+    <div class="pocket-card-foot">
+      <button class="pk-close" onclick="document.getElementById('pocket-overlay').style.display='none'">إغلاق</button>
+      <button class="pk-share-img" onclick="shareCardAsImage()">📸 مشاركة صورة</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- /appSection -->
+
+
+<!-- ══════════════ VIEWER SECTION ══════════════ -->
+<div id="viewerSection">
+
+<header>
+  <div class="hdr">
+    <div class="hdr-logo">🏛️</div>
+    <div class="hdr-text">
+      <h1>جداول التقاعد الاختياري</h1>
+      <p>عرض خطة تقاعدية مشارَكة</p>
+    </div>
+    <div class="hdr-badge">جدول مشارَك</div>
+  </div>
+</header>
+
+<main>
+  <div id="loadingState">
+    <div class="loader-ring"></div>
+    <p>جاري تحميل الجدول...</p>
+  </div>
+  <div id="errorState">
+    <div class="error-icon">⚠️</div>
+    <h2>تعذّر تحميل الجدول</h2>
+    <p id="errorMsg">الرابط غير صحيح أو منتهي الصلاحية.<br>يرجى التواصل مع من أرسل لك الرابط.</p>
+  </div>
+  <div id="actionBar">
+    <div class="share-info-badge" id="infoLabel">🔗 جاري التحميل...</div>
+    <button class="btn btn-pdf" id="openPdfBtn">🖨️ طباعة / معاينة</button>
+    <button class="btn btn-dl"  id="dlPdfBtn">📥 تحميل مباشر</button>
+  </div>
+  <div id="viewerContent"></div>
+</main>
+
+<div class="viewer-footer">
+  جداول التقاعد الاختياري — نظام رسمي لاحتساب الراتب التقاعدي<br>
+  <a href="https://linktr.ee/Daman2026" target="_blank" rel="noopener noreferrer">للمزيد من المعلومات والاستفسارات اضغط هنا</a>
+</div>
+</div><!-- /viewerSection -->
+
+<script>
+document.querySelectorAll('.radio-opt').forEach(function(label){
+  label.addEventListener('click',function(){
+    var name=this.querySelector('input').name;
+    document.querySelectorAll('[name="'+name+'"]').forEach(function(inp){
+      inp.closest('.radio-opt').classList.remove('active');
+    });
+    this.classList.add('active');
+  });
+});
+/* fixed cat toggle */
+document.querySelectorAll('[name="fixedCatOpt"]').forEach(function(inp){
+  inp.addEventListener('change',function(){
+    const wrap=document.getElementById('fixedCatSelectWrap');
+    if(wrap)wrap.style.display=this.value==='yes'?'flex':'none';
+  });
+});
+</script>
+
+<script>
+/* ═══════════════════════════════════════════════
+   SHARED LOGIC — مشترك بين وضع الإدخال والعرض
+═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════
+   SHARED LOGIC — used by both app.js & viewer.js
+═══════════════════════════════════════════════ */
+const SAL={1:350000,2:455000,3:560000,4:665000,5:770000,6:875000,7:980000,8:1085000,9:1190000,10:1295000,11:1400000,12:1505000,13:1610000,14:1715000,15:1750000};
+const PLAN_ACCENT=['ac1','ac2','ac3','ac4','ac5'];
+const PLAN_ICON_C=['ic1','ic2','ic3','ic4','ic5'];
+const PLAN_EMOJI=['🎯','📅','💰','⏰','👩‍💼'];
+const COLORS=['#2a5298','#1a5c38','#d4aa50','#8b2248','#4a2878'];
+
+function N(n){return Math.round(n).toLocaleString('ar-IQ')}
+function FM(m){const y=Math.floor(m/12),mo=m%12;if(!y)return`${mo} شهر`;if(!mo)return`${y} سنة`;return`${y} سنة و${mo} شهر`}
+function fmtDate(d){return d.toLocaleDateString('ar-IQ',{year:'numeric',month:'long',day:'numeric'})}
+
+function buildCatPlan(sa,ta,sc,targetCat){
+  sa=Math.min(Math.max(sa,0),100);ta=Math.min(Math.max(ta,sa),100);
+  if(ta-sa>60)ta=sa+60;
+  const TC=(targetCat&&targetCat>=1&&targetCat<=15)?Math.max(targetCat,sc):15;
+  let rows=[];for(let a=sa;a<=ta;a++)rows.push({age:a,cat:null});
+  const total=rows.length,last5Start=Math.max(total-5,0),yearsB5=last5Start;
+  const maxReach=Math.min(TC,sc+yearsB5);
+  if(sc>=TC){rows.forEach(r=>r.cat=TC);}
+  else if(yearsB5===0){let cat=sc;for(let i=0;i<total;i++){rows[i].cat=Math.min(TC,cat);if(i<total-1)cat=Math.min(TC,cat+1);}}
+  else if(yearsB5>=(TC-sc)){let rem=yearsB5-(TC-sc);for(let i=0;i<total;i++){if(i<rem)rows[i].cat=sc;else if(i<last5Start)rows[i].cat=Math.min(TC,sc+(i-rem));else rows[i].cat=TC;}}
+  else{let cat=sc;for(let i=0;i<total;i++){rows[i].cat=Math.min(TC,cat);if(i<total-1)cat=Math.min(TC,cat+1);}}
+  for(let i=1;i<total;i++){if(rows[i].cat-rows[i-1].cat>1)rows[i].cat=rows[i-1].cat+1;if(rows[i].cat>15)rows[i].cat=15;if(rows[i].cat<1)rows[i].cat=1;}
+  return rows;
+}
+
+function avgLast5(plan){if(!plan.length)return 350000;const last=plan.slice(-5);return last.reduce((a,r)=>a+SAL[r.cat],0)/last.length;}
+function calcPension(avg,mo){let p=avg*0.025*mo/12;p=Math.min(p,avg*0.8);p=Math.max(p,350000);return p;}
+/* تفصيل الاشتراكات حسب الفئة لكل خطة
+   maxMonths: حد الأشهر الفعلية (totalServiceMonths - purchaseMonths)
+   يمنع تضخيم الأشهر عند الانتساب في منتصف السنة */
+function buildSubscriptionBreakdown(yearsPlan,maxMonths){
+  const groups=[];
+  yearsPlan.forEach(r=>{
+    const last=groups[groups.length-1];
+    if(last&&last.cat===r.cat)last.years++;
+    else groups.push({cat:r.cat,years:1});
+  });
+  const cap=(maxMonths!==undefined)?maxMonths:Infinity;
+  let rem=cap;const out=[];
+  for(let i=0;i<groups.length;i++){
+    if(rem<=0)break;
+    const rawMo=groups[i].years*12,mo=Math.min(rawMo,rem);
+    rem-=mo;
+    out.push({cat:groups[i].cat,years:Math.floor(mo/12),extraMonths:mo%12,months:mo,salary:SAL[groups[i].cat],monthlyContrib:Math.round(SAL[groups[i].cat]*0.05),annualContrib:Math.round(SAL[groups[i].cat]*0.05*12),total:Math.round(SAL[groups[i].cat]*0.05*mo)});
+  }
+  return out;
+}
+function calcTotalSubscription(yearsPlan,maxMonths){return buildSubscriptionBreakdown(yearsPlan,maxMonths).reduce((t,g)=>t+g.total,0);}
+
+function showToast(msg){const t=document.getElementById('toast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
+
+function buildSummaryHTML(nm,g,age,ts,priorMo){
+  const items=[
+    {l:'الاسم',v:nm||'—'},
+    {l:'الجنس',v:g==='male'?'ذكر':'أنثى'},
+    {l:'العمر الحالي',v:`${age.years} سنة و${age.months} شهر`},
+    {l:'إجمالي الخدمة',v:FM(ts)},
+    {l:'الخدمة السابقة',v:priorMo>0?FM(priorMo):'لا يوجد'},
+  ];
+  return`<div class="sum-bar"><div class="sum-bar-title">📊 ملخص بيانات المشترك</div><div class="sum-items">${items.map(it=>`<div class="sum-item"><div class="si-l">${it.l}</div><div class="si-v">${it.v}</div></div>`).join('')}</div></div>`;
+}
+
+/* ── أسماء الفئات بصيغة الترتيب العربي ── */
+const CAT_ORD=['','الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة','السابعة','الثامنة','التاسعة','العاشرة','الحادية عشرة','الثانية عشرة','الثالثة عشرة','الرابعة عشرة','الخامسة عشرة'];
+function ordCat(c){return CAT_ORD[c]||`فئة ${c}`;}
+
+/* ── ⭐ ملاحظة مقارنة تلقائية بين الخطط ── */
+function buildPlanNote(plan,allPlans){
+  if(!allPlans||!allPlans.length)return'';
+  const minAge=Math.min(...allPlans.map(p=>p.targetAge));
+  const maxPension=Math.max(...allPlans.map(p=>p.pension));
+  const minPension=Math.min(...allPlans.map(p=>p.pension));
+  if(plan.targetAge===minAge)
+    return`⭐ تعتبر هذه أسرع خطة للوصول إلى التقاعد${plan.purchaseMonths>0?'، لكنها تتطلب دفع مبلغ شراء الخدمة.':'.'}`;
+  if(plan.pension===maxPension){
+    const diff=Math.round(maxPension-minPension);
+    return`⭐ تمتاز هذه الخطة بالحصول على أعلى راتب تقاعدي ممكن${diff>0?`، ويزيد راتبك بحوالي ${N(diff)} دينار شهرياً مقارنة بأقل الخطط راتباً.`:'.'}`;
+  }
+  if(plan.purchaseMonths===0)
+    return`⭐ تمتاز هذه الخطة بأنها توفر عليك مبلغ شراء الخدمة، لكنك ستنتظر مدة أطول للوصول إلى التقاعد مقارنة بالخطط الأخرى.`;
+  return`⭐ خطة متوازنة بين مدة الانتظار ومبلغ شراء الخدمة مقارنة بالخطط الأخرى.`;
+}
+
+/* ── 📌 شرح الخطة (نص مولّد تلقائياً من بيانات الخطة) ── */
+function buildPlanExplanationText(plan,g,allPlans){
+  const f=g==='female';
+  const startAge=plan.yearsPlan&&plan.yearsPlan.length?plan.yearsPlan[0].age:plan.targetAge;
+  const hasBuy=plan.purchaseMonths>0;
+  const actual=plan.totalServiceMonths-plan.purchaseMonths;
+  let t=`📌 شرح ${plan.title} (${plan.desc})\n`;
+  t+=`${f?'تبدئين':'تبدأ'} الاشتراك بعمر ${startAge} سنة.\n`;
+  t+=`${f?'تستمرين':'تستمر'} بتسديد الاشتراكات حتى إكمال عمر ${plan.targetAge} سنة.\n`;
+  t+=`عند هذا العمر ستكون ${f?'خدمتكِ':'خدمتك'} الفعلية ${FM(actual)}.\n`;
+  if(hasBuy)t+=`وبحسب المادة (33) من قانون الضمان الاجتماعي رقم 18 لسنة 2023، ${f?'يمكنكِ':'يمكنك'} شراء ${FM(plan.purchaseMonths)} ليصبح مجموع ${f?'خدمتكِ':'خدمتك'} ${FM(plan.totalServiceMonths)} وتستحق${f?'ين':''} الإحالة إلى التقاعد.\n`;
+  else t+=`ولا ${f?'تحتاجين':'تحتاج'} إلى شراء أي خدمة إضافية للوصول إلى مجموع ${FM(plan.totalServiceMonths)}.\n`;
+  t+=`الراتب التقاعدي المتوقع يبلغ حوالي ${N(plan.pension)} دينار.\n`;
+  if(hasBuy)t+=`ويبلغ مبلغ شراء الخدمة حوالي ${N(plan.purchaseCost)} دينار.\n`;
+  const note=buildPlanNote(plan,allPlans);
+  if(note)t+=note+'\n';
+  return t;
+}
+function buildPlanExplanationHTML(plan,g,allPlans){
+  const lines=buildPlanExplanationText(plan,g,allPlans).split('\n').filter(Boolean);
+  const body=lines.slice(1).map(l=>`<p>${l}</p>`).join('');
+  return`<div class="plan-explain-block no-print"><div class="explain-title">📌 شرح الخطة</div><div class="explain-text">${body}</div></div>`;
+}
+
+/* ── 📈 خطة الانتقال بين الفئات (مبني تلقائياً من جدول الخطة) ── */
+function buildCatTransitionText(plan){
+  const yp=plan.yearsPlan;
+  if(!yp||!yp.length)return'';
+  const groups=[];
+  yp.forEach(r=>{const last=groups[groups.length-1];if(last&&last.cat===r.cat)last.years++;else groups.push({cat:r.cat,startAge:r.age,years:1});});
+  let t=`📈 خطة الانتقال بين الفئات\n`;
+  t+=`أنت حالياً تبدأ بالفئة ${ordCat(groups[0].cat)}.\n`;
+  for(let i=1;i<groups.length;i++){
+    const prev=groups[i-1];
+    if(i===1)t+=`عند إكمال عمر ${groups[i].startAge} سنة يمكنك الانتقال إلى الفئة ${ordCat(groups[i].cat)}.\n`;
+    else t+=`وبعد تسديد 12 شهراً في الفئة ${ordCat(prev.cat)} يمكنك الانتقال إلى الفئة ${ordCat(groups[i].cat)} (بعمر ${groups[i].startAge} سنة).\n`;
+  }
+  if(groups.length===1)t+=`وتبقى ضمن هذه الفئة حتى نهاية الخطة دون أي انتقال.\n`;
+  return t;
+}
+function buildCatTransitionHTML(plan){
+  const txt=buildCatTransitionText(plan);
+  if(!txt)return'';
+  const lines=txt.split('\n').filter(Boolean);
+  const body=lines.slice(1).map(l=>`<p>${l}</p>`).join('');
+  return`<div class="cat-transition-block no-print"><div class="explain-title">📈 خطة الانتقال بين الفئات</div><div class="explain-text">${body}</div></div>`;
+}
+
+/* ── 📜 ملاحظات قانونية عامة (نص ثابت مرتبط بالقانون) ── */
+function buildLegalNotesText(){
+  return`📜 ملاحظات قانونية (وفق قانون الضمان الاجتماعي رقم 18 لسنة 2023):\n`+
+  `- الحد الأدنى للراتب التقاعدي 350,000 دينار، والحد الأقصى 80% من متوسط الأجر الداخل في حساب التقاعد (المادة 36).\n`+
+  `- الراتب التقاعدي يُستحق فقط عند إكمال السن القانونية وليس عند مجرد بلوغها.\n`+
+  `- الاشتراك الشهري يُحتسب بنسبة 5% من أجر الفئة الوظيفية.\n`+
+  `- شراء الخدمة وفق المادة (33) يُحتسب بواقع 17% من متوسط الأجر شهرياً عن كل شهر شراء.\n`+
+  `- هذه النتائج تقديرية وتخضع للتغيير وفق التشريعات والتعليمات النافذة.`;
+}
+function buildLegalNotesHTML(){
+  const lines=buildLegalNotesText().split('\n').filter(Boolean);
+  const body=lines.slice(1).map(l=>`<p>${l}</p>`).join('');
+  return`<div class="plan-explain-block no-print" id="legalNotesBlock"><div class="explain-title">📜 ملاحظات قانونية</div><div class="explain-text">${body}</div></div>`;
+}
+
+function buildPlanCard(plan,ci,nm,g,age,prevMo,ts,targetCatForLast5,allPlans){
+  const ac=PLAN_ACCENT[ci]||'ac1',ic=PLAN_ICON_C[ci]||'ic1',em=PLAN_EMOJI[ci]||'📋',n=ci+1;
+  const hasBuy=plan.purchaseMonths>0,actual=plan.totalServiceMonths-plan.purchaseMonths,future=Math.max(0,actual-ts);
+  const rawP=plan.avg*0.025*plan.totalServiceMonths/12,afterCap=Math.min(rawP,plan.avg*0.8);
+  const capNote=afterCap<350000?' — <span style="color:var(--amber)">طُبِّق الحد الأدنى 350,000 د.ع (م.36)</span>':(rawP>plan.avg*0.8?' — <span style="color:var(--amber)">طُبِّق الحد الأقصى 80% (م.36)</span>':'');
+  let tbody='';const last=plan.yearsPlan.length-1;
+  let cumulMonths=prevMo;
+  plan.yearsPlan.forEach((r,i)=>{
+    cumulMonths+=12;
+    const is5=i>=plan.yearsPlan.length-5,isRet=i===last,cls=isRet?'rret':(is5?'r5':'');
+    const cp=`<span class="cpill${r.cat===15?' c15':''}">${r.cat}</span>`;
+    tbody+=`<tr class="${cls}"><td>${r.age} سنة</td><td>${cp}</td></tr>`;
+  });
+  const copyBtn=`<button class="copy-btn no-print" data-i="${n}">📋 نسخ</button>`;
+  const avgSrc=targetCatForLast5
+    ?`مستقر على الفئة ${targetCatForLast5} — ${N(SAL[targetCatForLast5])} د.ع`
+    :plan.yearsPlan.slice(-5).map(r=>`ف${r.cat}:${N(SAL[r.cat])}`).join(' + ');
+
+  /* ── PENSION HERO BAND ── */
+  const pensionHero=`
+  <div class="pension-hero">
+    <div class="pension-main">
+      <div class="pension-lbl">💰 الراتب التقاعدي الشهري</div>
+      <div class="pension-amount">${N(plan.pension)}<span style="font-size:.9rem;font-weight:400;margin-right:5px;opacity:.7">د.ع</span></div>
+      <div class="pension-sub">${N(plan.avg)} × 2.5% × ${plan.totalServiceMonths} شهر ÷ 12${capNote}</div>
+    </div>
+    <div class="pension-side">
+      <div class="pension-stat"><div class="ps-l">سن التقاعد</div><div class="ps-v">${plan.targetAge} سنة</div></div>
+      <div class="pension-stat"><div class="ps-l">مدة الخدمة</div><div class="ps-v">${FM(plan.totalServiceMonths)}</div></div>
+      <div class="pension-stat"><div class="ps-l">تاريخ التقاعد</div><div class="ps-v" style="font-size:.78rem">${plan.retireDate.toLocaleDateString('ar-IQ',{month:'long',year:'numeric'})}</div></div>
+    </div>
+  </div>`;
+
+  /* ── BUY BAND (conditional) ── */
+  const buyBand=hasBuy?`
+  <div class="buy-band">
+    <span class="buy-pill">🛒 شراء خدمة</span>
+    <span class="buy-detail">${plan.purchaseMonths} شهر · ${N(plan.purchaseCost)} د.ع إجمالاً · ${N(plan.avg*0.17)} د.ع/شهر</span>
+  </div>`:'';
+
+  return`<div class="plan-card ${ac}" id="plan-card-${n}">
+  <div class="plan-hdr">
+    <div class="plan-hdr-l">
+      <div class="plan-icon ${ic}">${em}</div>
+      <div>
+        <div class="plan-seq">الخطة ${n}</div>
+        <div class="plan-name">${plan.title}</div>
+        <div class="plan-desc">${plan.desc}</div>
+      </div>
+    </div>
+    ${copyBtn}
+  </div>
+  ${pensionHero}
+  ${buyBand}
+  <div class="plan-body">
+    <div class="plan-user-row">
+      <span>👤 <b>${nm||'—'}</b></span>
+      <span>🎂 <b>${age.years} سنة و${age.months} شهر</b></span>
+      <span>⏳ خدمة حالية: <b>${FM(ts)}</b></span>
+      ${prevMo>0?`<span>🗂️ خدمة سابقة: <b>${FM(prevMo)}</b></span>`:''}
+    </div>
+    <div class="drows">
+      <div class="dr"><span class="dk">📅 تاريخ التقاعد المتوقع</span><span class="dv">${fmtDate(plan.retireDate)}</span></div>
+      <div class="dr"><span class="dk">⏱️ خدمة فعلية</span><span class="dv">${FM(actual)}</span></div>
+      ${future>0?`<div class="dr"><span class="dk">🔮 خدمة مستقبلية</span><span class="dv">${FM(future)}</span></div>`:''}
+      ${hasBuy?`<div class="dr"><span class="dk">🛒 أشهر الشراء المطلوبة</span><span class="dv w">${plan.purchaseMonths} شهر — ${FM(plan.purchaseMonths)}</span></div>`:''}
+      <div class="dr"><span class="dk">📋 إجمالي الخدمة</span><span class="dv">${FM(plan.totalServiceMonths)}</span></div>
+      <div class="dr"><span class="dk">💵 متوسط الأجر (آخر 5 سنوات)</span>
+        <span class="dv">${N(plan.avg)} د.ع
+          <span style="font-size:.65rem;color:var(--muted);font-weight:400;display:block;margin-top:2px">${avgSrc}</span>
+        </span>
+      </div>
+      <div class="dr"><span class="dk">💰 الراتب التقاعدي الشهري</span>
+        <span class="dv g">${N(plan.pension)} د.ع
+          <span style="font-size:.64rem;color:var(--green2);font-weight:400;display:block;margin-top:2px;opacity:.85">${N(plan.avg)} × 2.5% × ${plan.totalServiceMonths} شهر ÷ 12${capNote}</span>
+        </span>
+      </div>
+      ${hasBuy?`
+      <div class="dr"><span class="dk">💸 سعر الشهر الواحد</span><span class="dv">${N(plan.avg*0.17)} د.ع</span></div>
+      <div class="dr"><span class="dk">💸 سعر السنة الواحدة</span><span class="dv">${N(plan.avg*0.17*12)} د.ع</span></div>
+      <div class="dr"><span class="dk">💸 إجمالي مبلغ الشراء</span><span class="dv b">${N(plan.purchaseCost)} د.ع</span></div>`:''}
+    </div>
+    <div class="rpill">⚠️ يستحق الراتب عند <b style="margin:0 3px">إكمال</b> سن ${plan.targetAge} وليس عند مجرد بلوغه</div>
+    <div>
+      <div class="tbl-head">
+        <h4>📊 جدول تدرج الفئات الوظيفية</h4>
+        <div class="tleg">
+          <div class="tleg-i"><div class="tdot ldy"></div>آخر 5 سنوات</div>
+          <div class="tleg-i"><div class="tdot ldg"></div>سنة التقاعد</div>
+        </div>
+      </div>
+      <div class="tbl-wrap"><table class="ctbl"><thead><tr><th>السن</th><th>الفئة</th></tr></thead><tbody>${tbody}</tbody></table></div>
+    </div>
+    ${buildPlanExplanationHTML(plan,g,allPlans)}
+    ${buildCatTransitionHTML(plan)}
+  </div></div>`;
+}
+
+/* decodeLinkPayload / parseSharedPayload removed from app.js — only viewer.js needs them */
+
+function exportPDFPlans(PLANS,USER,QR_B64,QR_LINK,mode){
+  if(!PLANS||!PLANS.length||!USER)return;
+  mode=mode||'print';
+  const nm=USER.nm||'مشترك',gender=USER.gender==='male'?'ذكر':'أنثى';
+  const today=new Date().toLocaleDateString('ar-IQ',{year:'numeric',month:'long',day:'numeric'});
+  const priorStr=(USER.py>0||USER.pm>0)?FM(USER.py*12+USER.pm):'لا يوجد';
+  const css=`@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Tajawal',sans-serif;direction:rtl;text-align:right;color:#18120a;background:#fff;font-size:12px;line-height:1.6}
+.cover{background:linear-gradient(160deg,#050d1a 0%,#112240 60%,#1d3461 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;padding:40px 30px;min-height:100vh}
+.cover-logo{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#a07820,#f0cc70);display:flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:24px;box-shadow:0 0 0 4px rgba(212,170,80,.3),0 8px 24px rgba(0,0,0,.4)}
+.cover h1{font-family:'Amiri',serif;font-size:28px;color:#f0cc70;margin-bottom:8px;text-align:center}.cover p{color:#b0c4de;font-size:13px;text-align:center}
+.cover-divider{width:200px;height:2px;background:linear-gradient(90deg,transparent,#d4aa50,transparent);margin:20px 0}
+.cover-card{background:rgba(255,255,255,.08);border:1px solid rgba(212,170,80,.28);border-radius:12px;padding:20px 28px;width:100%;max-width:420px;margin-bottom:20px}
+.cover-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:13px}.cover-row:last-child{border-bottom:none}
+.lbl{color:#8fb3d9;font-size:11px;font-weight:600}.val{color:#f0e6c8;font-weight:700}
+.cover-plans{width:100%;max-width:420px}
+.cover-plan-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:12px;color:#d0e4f7}
+.plan-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.plans-wrapper{padding:0}
+.plan-hdr-bar{padding:12px 18px;display:flex;align-items:center;justify-content:space-between;color:#fff}
+.plan-hdr-bar h2{font-family:'Amiri',serif;font-size:18px;font-weight:700}
+.plan-num-badge{font-size:11px;background:rgba(255,255,255,.15);padding:4px 12px;border-radius:20px}
+.emp-bar{display:flex;flex-wrap:wrap;background:#f0f4fa;border-bottom:1px solid #dde4f0;padding:8px 14px;gap:16px}
+.emp-cell{display:flex;flex-direction:column;gap:1px}.emp-lbl{font-size:9px;color:#7a8aaa;text-transform:uppercase;letter-spacing:.05em;font-weight:700}.emp-val{font-size:12px;color:#0a1628;font-weight:700}
+.stats-row{display:flex;flex-wrap:wrap;border-bottom:1px solid #eee}
+.stat-box{flex:1;min-width:80px;padding:10px 12px;text-align:center;border-left:1px solid #eee}.stat-box:last-child{border-left:none}
+.sl{font-size:9px;color:#7a8aaa;text-transform:uppercase;letter-spacing:.04em;font-weight:700;margin-bottom:3px}
+.sv{font-size:14px;font-weight:900;color:#0a1628;font-family:'Amiri',serif}.sv-good{color:#1a5c38}.sv-warn{color:#c07800}.sv-bad{color:#8b1c1c}
+.details-grid{padding:10px 16px;margin-bottom:10px}
+.detail-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed rgba(10,22,40,.07);font-size:11px}.detail-row:last-child{border-bottom:none}
+.dk{color:#8a7a68;font-weight:500}.dv{font-weight:700;color:#0a1628}.dv-g{color:#1a5c38}.dv-r{color:#8b1c1c}.dv-a{color:#c07800}
+.rpill{display:flex;gap:6px;background:#fff8e6;border:1px solid rgba(192,120,0,.22);border-radius:6px;padding:6px 12px;font-size:10.5px;font-weight:600;color:#c07800;margin:0 16px 10px;align-items:center}
+.tbl-title{font-size:11px;font-weight:800;color:#1d3461;text-transform:uppercase;letter-spacing:.06em;padding:0 16px;margin-bottom:6px}
+table{width:100%;border-collapse:collapse;font-size:11px}th{background:linear-gradient(135deg,#0a1628,#2a5298);color:#f0e8d0;font-weight:700;font-size:9.5px;padding:7px 12px;text-align:center}td{padding:5px 12px;text-align:center;border-bottom:1px solid rgba(10,22,40,.06)}
+tr.r5 td{background:#fff9e0;font-weight:600}tr.rret td{background:#e6f7ee;color:#1a5c38;font-weight:900}tr:nth-child(even) td{background:rgba(10,22,40,.018)}
+tr.r5:nth-child(even) td,tr.rret:nth-child(even) td{background:unset}
+.plan-separator{border:none;border-top:2px dashed #dde4f0;margin:20px 16px}
+.plan-page{padding-bottom:20px}
+.page-footer{text-align:center;padding:16px;font-size:9.5px;color:#9a8e7f;border-top:1px solid #eee;margin-top:14px}
+@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}.cover{min-height:initial;page-break-after:always}.plan-page{page-break-inside:avoid}@page{margin:12mm 10mm}}`;
+
+  let body=`<div class="cover"><div class="cover-logo">🏛️</div><h1>جداول التقاعد الاختياري</h1><p>جداول تقاعدية محسوبة وفق نظام التقاعد الاختياري</p><div class="cover-divider"></div>
+  <div class="cover-card">
+    <div class="cover-row"><span class="lbl">الاسم</span><span class="val">${nm}</span></div>
+    <div class="cover-row"><span class="lbl">الجنس</span><span class="val">${gender}</span></div>
+    <div class="cover-row"><span class="lbl">العمر الحالي</span><span class="val">${USER.ay} سنة و${USER.am} شهر</span></div>
+    <div class="cover-row"><span class="lbl">إجمالي الخدمة</span><span class="val">${FM(USER.ts)}</span></div>
+    <div class="cover-row"><span class="lbl">الخدمة السابقة</span><span class="val">${priorStr}</span></div>
+    <div class="cover-row"><span class="lbl">عدد الخطط</span><span class="val">${PLANS.length} ${PLANS.length===1?'خطة':'خطط'}</span></div>
+    <div class="cover-row"><span class="lbl">تاريخ التقرير</span><span class="val">${today}</span></div>
+  </div>
+  <div class="cover-plans">${PLANS.map((p,i)=>`<div class="cover-plan-row"><div class="plan-dot" style="background:${['#2a5298','#1a5c38','#d4aa50','#8b2248','#4a2878'][i]||'#2a5298'}"></div><span>${p.title} — ${p.desc}</span><span style="margin-right:auto;color:#f0cc70;font-weight:700">${N(p.pension)} د.ع</span></div>`).join('')}</div>
+  <div style="margin-top:20px;text-align:center"><img src="data:image/jpeg;base64,QR_PLACEHOLDER" style="width:100px;height:100px;border:3px solid rgba(212,170,80,.5);border-radius:10px;padding:4px;background:rgba(255,255,255,.1)" alt="QR"/><p style="color:#f0cc70;font-size:11px;margin-top:8px;font-weight:600">امسح الكود للتواصل | linktr.ee/Daman2026</p></div>
+  </div><div class="plans-wrapper">`;
+
+  const PCOLS=['#2a5298','#1a5c38','#d4aa50','#8b2248','#4a2878'];
+  PLANS.forEach((plan,pi)=>{
+    const color=PCOLS[pi]||'#2a5298',hasBuy=plan.purchaseMonths>0,actual=plan.totalServiceMonths-plan.purchaseMonths,future=Math.max(0,actual-USER.ts),lastIdx=plan.yearsPlan.length-1;
+    const rawP=plan.avg*0.025*plan.totalServiceMonths/12,afterCap=Math.min(rawP,plan.avg*0.8);
+    const capNote=afterCap<350000?' — طُبِّق الحد الأدنى 350,000 د.ع (م.36)':(rawP>plan.avg*0.8?' — طُبِّق الحد الأقصى 80% (م.36)':'');
+    /* جدول الفئات في PDF */
+    let tRows='';let cM=(USER.py||0)*12+(USER.pm||0);plan.yearsPlan.forEach((r,i)=>{cM+=12;const is5=i>=plan.yearsPlan.length-5,isRet=i===lastIdx,cls=isRet?'rret':(is5?'r5':'');tRows+=`<tr class="${cls}"><td>${r.age} سنة</td><td>فئة ${r.cat}</td></tr>`;});
+    body+=`${pi>0?'<hr class="plan-separator">':''}
+    <div class="plan-page">
+      <div class="plan-hdr-bar" style="background:${color}"><h2>${plan.title}</h2><div class="plan-num-badge">${plan.desc}</div></div>
+      <div class="emp-bar">
+        <div class="emp-cell"><div class="emp-lbl">المشترك</div><div class="emp-val">${nm}</div></div>
+        <div class="emp-cell"><div class="emp-lbl">الجنس</div><div class="emp-val">${gender}</div></div>
+        <div class="emp-cell"><div class="emp-lbl">العمر</div><div class="emp-val">${USER.ay} سنة ${USER.am} شهر</div></div>
+        <div class="emp-cell"><div class="emp-lbl">الخدمة الحالية</div><div class="emp-val">${FM(USER.ts)}</div></div>
+        ${(USER.py>0||USER.pm>0)?`<div class="emp-cell"><div class="emp-lbl">الخدمة السابقة</div><div class="emp-val">${priorStr}</div></div>`:''}
+      </div>
+      <div class="stats-row">
+        <div class="stat-box"><div class="sl">سن التقاعد</div><div class="sv">${plan.targetAge} سنة</div></div>
+        <div class="stat-box"><div class="sl">مدة الخدمة</div><div class="sv">${FM(plan.totalServiceMonths)}</div></div>
+        <div class="stat-box" style="background:#e6f7ee"><div class="sl">الراتب الشهري</div><div class="sv sv-good">${N(plan.pension)} د.ع</div></div>
+        ${hasBuy?`<div class="stat-box" style="background:#fff8e6"><div class="sl">أشهر الشراء</div><div class="sv sv-warn">${plan.purchaseMonths} شهر</div></div><div class="stat-box" style="background:#fdf0f0"><div class="sl">تكلفة الشراء</div><div class="sv sv-bad">${N(plan.purchaseCost)} د.ع</div></div>`:''}
+      </div>
+      <div class="details-grid">
+        <div class="detail-row"><span class="dk">📅 تاريخ التقاعد المتوقع</span><span class="dv">${fmtDate(plan.retireDate)}</span></div>
+        <div class="detail-row"><span class="dk">⏱️ خدمة فعلية</span><span class="dv">${FM(actual)}</span></div>
+        ${future>0?`<div class="detail-row"><span class="dk">🔮 خدمة مستقبلية</span><span class="dv">${FM(future)}</span></div>`:''}
+        ${hasBuy?`<div class="detail-row"><span class="dk">🛒 أشهر الشراء</span><span class="dv dv-a">${plan.purchaseMonths} شهر — ${FM(plan.purchaseMonths)}</span></div>`:''}
+        <div class="detail-row"><span class="dk">📋 إجمالي الخدمة</span><span class="dv">${FM(plan.totalServiceMonths)}</span></div>
+        <div class="detail-row"><span class="dk">💵 متوسط آخر 5 سنوات</span><span class="dv">${N(plan.avg)} د.ع</span></div>
+        <div class="detail-row"><span class="dk">💰 الراتب التقاعدي الشهري</span><span class="dv dv-g">${N(plan.pension)} د.ع<span style="font-size:8px;color:#1a5c38;font-weight:400;display:block;margin-top:2px">${N(plan.avg)} × 2.5% × ${plan.totalServiceMonths} شهر ÷ 12${capNote}</span></span></div>
+        ${hasBuy?`<div class="detail-row"><span class="dk">💸 سعر الشهر الواحد</span><span class="dv">${N(plan.avg*0.17)} د.ع</span></div><div class="detail-row"><span class="dk">💸 سعر السنة الواحدة</span><span class="dv">${N(plan.avg*0.17*12)} د.ع</span></div><div class="detail-row"><span class="dk">💸 إجمالي مبلغ الشراء</span><span class="dv dv-r">${N(plan.purchaseCost)} د.ع</span></div>`:''}
+      </div>
+      <div class="rpill">⚠️ يستحق الراتب عند <strong>إكمال</strong> سن ${plan.targetAge} وليس عند مجرد بلوغه</div>
+      <div class="tbl-title">📊 جدول تدرج الفئات الوظيفية</div>
+      <table><thead><tr><th>السن</th><th>الفئة</th></tr></thead><tbody>${tRows}</tbody></table>
+      <div class="page-footer">نظام جداول التقاعد الاختياري — ${today}<br/><a href="${QR_LINK}" style="color:#d4aa50;font-weight:700;text-decoration:none">${QR_LINK}</a></div>
+    </div>`;
+  });
+  body+='</div>';
+
+  const fullHTML=`<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><title>تقاعد - ${nm}</title><style>${css}</style></head><body>${body}</body></html>`;
+  const finalHTML=fullHTML.split('QR_PLACEHOLDER').join(QR_B64);
+
+  if(mode==='download'){
+    /* فتح نافذة طباعة لحفظ الملف كـ PDF */
+    const win=window.open('','_blank','width=900,height=700');
+    if(!win){showToast('❌ يرجى السماح بفتح النوافذ المنبثقة في المتصفح');return;}
+    win.document.open();
+    win.document.write(finalHTML);
+    win.document.close();
+    win.focus();
+    setTimeout(function(){try{if(win&&!win.closed){win.print();}}catch(e){console.warn('print error',e);}},900);
+    showToast('✅ جاري عرض حوار الطباعة — اختر «حفظ كـ PDF» لحفظ الملف');
+    return;
+  }
+
+  /* وضع الطباعة — فتح نافذة وعرض حوار الطباعة */
+  const win=window.open('','_blank','width=900,height=700');
+  if(!win){showToast('❌ يرجى السماح بفتح النوافذ المنبثقة في المتصفح');return;}
+  win.document.open();
+  win.document.write(finalHTML);
+  win.document.close();
+  win.focus();
+  setTimeout(function(){try{if(win&&!win.closed){win.print();}}catch(e){console.warn('print error',e);}},900);
+  showToast('✅ جاري عرض حوار الطباعة — اختر «حفظ كـ PDF»');
+}
+
+/* ── تحديد الوضع: عرض أم إدخال ── */
+(function(){
+  var h=window.location.hash||'';
+  var isViewer=h.startsWith('#z=')||h.startsWith('#s=')||h.startsWith('#share=');
+  if(isViewer){
+    document.body.classList.add('viewer-mode');
+    document.title='عرض جدول التقاعد';
+  }
+})();
+
+/* ═══════════════════════════════════════════════
+   وضع الإدخال (app)
+═══════════════════════════════════════════════ */
+/*!
+ * app.js — جداول التقاعد الاختياري v5
+ */
+(function(){
+'use strict';
+
+const QR_B64 = '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
