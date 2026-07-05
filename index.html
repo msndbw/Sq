@@ -900,9 +900,9 @@ body.viewer-mode #viewerSection{display:block}
       <div class="field">
         <div class="field-lbl">تاريخ الميلاد <span class="req">*</span></div>
         <div class="date-slots">
+          <div class="date-slot slot-day"><div class="slot-pill">اليوم</div><select class="ctrl" id="birthDay"></select></div>
+          <div class="date-slot slot-month"><div class="slot-pill">الشهر</div><select class="ctrl" id="birthMonth" onchange="onMonthChange('birth')"></select></div>
           <div class="date-slot slot-year"><div class="slot-pill">السنة</div><select class="ctrl" id="birthYear" onchange="onYearChange('birth')"></select></div>
-          <div class="date-slot slot-month"><div class="slot-pill">الشهر</div><select class="ctrl" id="birthMonth" disabled onchange="onMonthChange('birth')"></select></div>
-          <div class="date-slot slot-day"><div class="slot-pill">اليوم</div><select class="ctrl" id="birthDay" disabled></select></div>
         </div>
       </div>
 
@@ -967,9 +967,9 @@ body.viewer-mode #viewerSection{display:block}
         <div class="sub-title">📅 تاريخ الانتساب <span class="sub-opt">(اختياري — يبدأ الحساب من العمر الحالي عند تركه فارغاً)</span></div>
         <div class="field" style="grid-column:1/-1">
           <div class="date-slots">
+            <div class="date-slot slot-day"><div class="slot-pill">اليوم</div><select class="ctrl" id="joinDay"></select></div>
+            <div class="date-slot slot-month"><div class="slot-pill">الشهر</div><select class="ctrl" id="joinMonth" onchange="onMonthChange('join')"></select></div>
             <div class="date-slot slot-year"><div class="slot-pill">السنة</div><select class="ctrl" id="joinYear" onchange="onYearChange('join')"></select></div>
-            <div class="date-slot slot-month"><div class="slot-pill">الشهر</div><select class="ctrl" id="joinMonth" disabled onchange="onMonthChange('join')"></select></div>
-            <div class="date-slot slot-day"><div class="slot-pill">اليوم</div><select class="ctrl" id="joinDay" disabled></select></div>
           </div>
         </div>
       </div>
@@ -1684,27 +1684,24 @@ function populate(){
   document.getElementById('birthYear').innerHTML=yb;document.getElementById('joinYear').innerHTML=yj;
   const mb='<option value="">الشهر</option>'+[1,2,3,4,5,6,7,8,9,10,11,12].map(m=>`<option value="${m}">${m}</option>`).join('');
   document.getElementById('birthMonth').innerHTML=mb;document.getElementById('joinMonth').innerHTML=mb;
-  document.getElementById('birthDay').innerHTML='<option value="">اليوم</option>';
-  document.getElementById('joinDay').innerHTML='<option value="">اليوم</option>';
+  const dd='<option value="">اليوم</option>'+Array.from({length:31},(_,i)=>i+1).map(d=>`<option value="${d}">${d}</option>`).join('');
+  document.getElementById('birthDay').innerHTML=dd;
+  document.getElementById('joinDay').innerHTML=dd;
   let ch='<option value="">— تلقائي —</option>';for(let i=1;i<=15;i++)ch+=`<option value="${i}">فئة ${i}  ←  ${SAL[i].toLocaleString()} د.ع</option>`;
   document.getElementById('currentCategory').innerHTML=ch;
 }
 function daysInMonth(y,m){return new Date(y,m,0).getDate();}
-/* إعادة بناء قائمة الأيام مع الحفاظ على القيمة المحددة إن كانت لا تزال صالحة */
+/* إعادة بناء قائمة الأيام حسب الشهر/السنة إن حُددا، مع الحفاظ على القيمة المحددة إن كانت لا تزال صالحة. الحقول الثلاثة تبقى مفتوحة دائماً بدون ترتيب إلزامي */
 function rebuildDays(ye,me,de){
   const y=+ye.value,m=+me.value;
-  if(!m){de.disabled=true;de.value='';de.innerHTML='<option value="">اليوم</option>';return;}
-  const prev=+de.value,max=daysInMonth(y||2000,m);
+  const prev=+de.value,max=m?daysInMonth(y||2000,m):31;
   let h='<option value="">اليوم</option>';
   for(let d=1;d<=max;d++)h+=`<option value="${d}"${d===prev?' selected':''}>${d}</option>`;
-  de.innerHTML=h;de.disabled=false;
+  de.innerHTML=h;
   if(prev>max)de.value=''; /* اليوم أصبح خارج النطاق (مثل 31 شباط) */
 }
 window.onYearChange=function(p){
   const ye=document.getElementById(p+'Year'),me=document.getElementById(p+'Month'),de=document.getElementById(p+'Day');
-  if(!+ye.value){me.disabled=true;me.value='';de.disabled=true;de.value='';de.innerHTML='<option value="">اليوم</option>';return;}
-  me.disabled=false;
-  /* إذا كان الشهر محدداً، أعد بناء الأيام بدون مسح اليوم */
   rebuildDays(ye,me,de);
 };
 window.onMonthChange=function(p){
@@ -1715,9 +1712,7 @@ window.onMonthChange=function(p){
 function reset(){
   document.getElementById('nameInput').value='';document.getElementById('genderSelect').value='';
   ['birthYear','birthMonth','birthDay','joinYear','joinMonth','joinDay'].forEach(id=>{
-    const el=document.getElementById(id);el.value='';
-    if(id!=='birthYear'&&id!=='joinYear')el.disabled=true;
-    if(id==='birthDay'||id==='joinDay')el.innerHTML='<option value="">اليوم</option>';
+    document.getElementById(id).value='';
   });
   document.getElementById('priorYears').value='';document.getElementById('priorMonths').value='';
   document.getElementById('fixedCatNo').checked=true;document.getElementById('fixedCatYes').checked=false;
